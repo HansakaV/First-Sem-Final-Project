@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="bookingPane" prefHeight="605.0" prefWidth="703.0" style="-fx-background-color: #4caf50;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.manathungatours.controller.BookingManagementFormController">
+   <children>
+      <Pane layoutX="78.0" layoutY="14.0" prefHeight="105.0" prefWidth="554.0" style="-fx-background-color: #212121; -fx-background-radius: 50px;">
+         <children>
+            <Label alignment="CENTER" layoutX="85.0" layoutY="7.0" prefHeight="89.0" prefWidth="427.0" text="Booking Management" textFill="#f2f0f0">
+               <font>
+                  <Font name="Agency FB Bold" size="53.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="23.0" layoutY="135.0" prefHeight="37.0" prefWidth="137.0" text="Booking ID  :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblBookId" layoutX="141.0" layoutY="135.0" prefHeight="37.0" prefWidth="137.0">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="362.0" layoutY="135.0" prefHeight="37.0" prefWidth="137.0" text="Date            :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDate" layoutX="471.0" layoutY="135.0" prefHeight="37.0" prefWidth="137.0">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="187.0" prefHeight="37.0" prefWidth="137.0" text="Passenger ID       :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cmbPassenger" layoutX="172.0" layoutY="187.0" prefHeight="30.0" prefWidth="160.0" promptText="Select Passenger" />
+      <Label layoutX="23.0" layoutY="246.0" prefHeight="37.0" prefWidth="137.0" text="Driver ID               :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cmbDriver" layoutX="172.0" layoutY="246.0" prefHeight="30.0" prefWidth="160.0" promptText="Select Driver" />
+      <Label layoutX="362.0" layoutY="187.0" prefHeight="37.0" prefWidth="150.0" text="Bus Reg Number  :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="362.0" layoutY="243.0" prefHeight="37.0" prefWidth="137.0" text="Description           :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cmbBus" layoutX="512.0" layoutY="191.0" prefHeight="30.0" prefWidth="160.0" promptText="Select Bus" />
+      <TextField fx:id="txtDescription" layoutX="512.0" layoutY="246.0" prefHeight="30.0" prefWidth="160.0" promptText="Description" />
+      <TableView fx:id="tblBookings" layoutX="14.0" layoutY="350.0" prefHeight="238.0" prefWidth="546.0">
+        <columns>
+          <TableColumn fx:id="colPId" prefWidth="78.0" text="BusReg" />
+          <TableColumn fx:id="colBId" prefWidth="83.0" text="DriverID" />
+            <TableColumn fx:id="colDId" text="PassengerID" />
+            <TableColumn fx:id="colDes" prefWidth="121.0" text="Description" />
+            <TableColumn fx:id="colDate" prefWidth="87.0" text="Date" />
+            <TableColumn fx:id="colCost" prefWidth="94.0" text="Cost" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnBook" alignment="BASELINE_RIGHT" layoutX="567.0" layoutY="551.0" mnemonicParsing="false" onAction="#placeBookingOnAction" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #212121; -fx-background-radius: 50px;" text="Book Now" textFill="#fffefe">
+         <font>
+            <Font name="Tahoma Bold" size="16.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="19.0" fitWidth="24.0" layoutX="583.0" layoutY="562.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/icons8-booking-50.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="23.0" layoutY="294.0" prefHeight="37.0" prefWidth="137.0" text="Date                      :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnConfirm" alignment="BASELINE_RIGHT" contentDisplay="CENTER" graphicTextGap="5.0" layoutX="567.0" layoutY="350.0" mnemonicParsing="false" onAction="#confirmOnAction" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #212121; -fx-background-radius: 50px;" text="Confirm !" textFill="#fffefe">
+         <font>
+            <Font name="Tahoma Bold" size="16.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="30.0" fitWidth="46.0" layoutX="577.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/icons8-confirmation-50.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtCost" layoutX="512.0" layoutY="298.0" prefHeight="30.0" prefWidth="160.0" promptText="Cost" />
+      <Label layoutX="362.0" layoutY="294.0" prefHeight="37.0" prefWidth="137.0" text="Cost                      :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="140.0" fitWidth="115.0" layoutX="575.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/icons8-get-on-bus-50.png" />
+         </image>
+      </ImageView>
+      <DatePicker fx:id="datepick" layoutX="172.0" layoutY="298.0" prefHeight="30.0" prefWidth="160.0" />
+   </children>
+</AnchorPane>

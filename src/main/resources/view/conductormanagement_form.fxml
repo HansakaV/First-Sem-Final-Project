@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="605.0" prefWidth="703.0" style="-fx-background-color: #4caf50;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.manathungatours.controller.ConductorManagementFormController">
+   <children>
+      <Pane layoutX="59.0" layoutY="14.0" prefHeight="81.0" prefWidth="603.0" style="-fx-background-color: #212121; -fx-background-radius: 50px;">
+         <children>
+            <Label alignment="CENTER" layoutX="97.0" layoutY="5.0" prefHeight="66.0" prefWidth="439.0" text="Conductor Management" textFill="#e8dcdc">
+               <font>
+                  <Font name="Agency FB Bold" size="54.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="43.0" layoutY="119.0" prefHeight="38.0" prefWidth="131.0" text="Conductor ID : ">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtid" layoutX="43.0" layoutY="153.0" onAction="#searchOnAction" onKeyReleased="#idOnRelaesed" prefHeight="30.0" prefWidth="180.0" promptText="ID">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="295.0" layoutY="119.0" prefHeight="38.0" prefWidth="131.0" text="Name :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtname" layoutX="295.0" layoutY="153.0" onKeyReleased="#nameOnRelaesed" prefHeight="30.0" prefWidth="173.0" promptText="Name">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="43.0" layoutY="196.0" prefHeight="38.0" prefWidth="131.0" text="Address :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="295.0" layoutY="196.0" prefHeight="38.0" prefWidth="131.0" text="Tel :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtaddress" layoutX="43.0" layoutY="228.0" onKeyReleased="#addressOnRelaesed" prefHeight="30.0" prefWidth="180.0" promptText="Address">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txttel" layoutX="295.0" layoutY="228.0" onKeyReleased="#telOnRelaesed" prefHeight="30.0" prefWidth="173.0" promptText="Tel">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TableView fx:id="tblconductors" layoutX="43.0" layoutY="308.0" prefHeight="266.0" prefWidth="465.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="118.0" text="ID" />
+          <TableColumn fx:id="colName" prefWidth="102.0" text="Name" />
+            <TableColumn fx:id="colAddress" prefWidth="116.0" text="Address" />
+            <TableColumn fx:id="colTel" prefWidth="128.0" text="Tel" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnBack" alignment="CENTER_RIGHT" layoutX="540.0" layoutY="547.0" mnemonicParsing="false" onAction="#backOnAction" prefHeight="44.0" prefWidth="138.0" style="-fx-background-radius: 50px; -fx-background-color: #d84315;" text="Back" textFill="#dad7d7">
+         <font>
+            <Font name="Tahoma Bold" size="22.0" />
+         </font></Button>
+      <Button fx:id="btnClear" alignment="CENTER_RIGHT" layoutX="544.0" layoutY="135.0" mnemonicParsing="false" onAction="#clearOnAction" prefHeight="44.0" prefWidth="131.0" style="-fx-background-radius: 50px; -fx-background-color: #212121;" text="Clear" textFill="#dad7d7">
+         <font>
+            <Font name="Tahoma Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnSave" alignment="CENTER_RIGHT" layoutX="547.0" layoutY="193.0" mnemonicParsing="false" onAction="#saveOnAction" prefHeight="44.0" prefWidth="131.0" style="-fx-background-radius: 50px; -fx-background-color: #212121;" text="Save" textFill="#dad7d7">
+         <font>
+            <Font name="Tahoma Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnUpdate" alignment="CENTER_RIGHT" layoutX="544.0" layoutY="249.0" mnemonicParsing="false" onAction="#updateOnAction" prefHeight="44.0" prefWidth="131.0" style="-fx-background-radius: 50px; -fx-background-color: #212121;" text="Update" textFill="#dad7d7">
+         <font>
+            <Font name="Tahoma Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnDelete" alignment="CENTER_RIGHT" layoutX="544.0" layoutY="303.0" mnemonicParsing="false" onAction="#deleteOnAction" prefHeight="44.0" prefWidth="131.0" style="-fx-background-radius: 50px; -fx-background-color: #212121;" text="Delete" textFill="#dad7d7">
+         <font>
+            <Font name="Tahoma Bold" size="15.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="38.0" fitWidth="44.0" layoutX="560.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/clear.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="45.0" layoutX="560.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/save.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="44.0" layoutX="557.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/update.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="560.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/delete.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="560.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/exit.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="129.0" fitWidth="131.0" layoutX="533.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/icons8-get-on-bus-50.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

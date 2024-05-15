@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="busPane" prefHeight="605.0" prefWidth="703.0" style="-fx-background-color: #4caf50;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.manathungatours.controller.BusManagementFormController">
+   <children>
+      <Pane layoutX="59.0" layoutY="14.0" prefHeight="81.0" prefWidth="603.0" style="-fx-background-color: #212121; -fx-background-radius: 50px;">
+         <children>
+            <Label alignment="CENTER" layoutX="149.0" layoutY="5.0" prefHeight="62.0" prefWidth="324.0" text="Bus Management" textFill="#e8dcdc">
+               <font>
+                  <Font name="Agency FB Bold" size="54.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="43.0" layoutY="119.0" prefHeight="38.0" prefWidth="131.0" text="Bus Reg Number : ">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtRegNumber" layoutX="43.0" layoutY="153.0" onAction="#searchOnAction" onKeyReleased="#busKeyOnReleased" prefHeight="30.0" prefWidth="180.0" promptText="Reg Number">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="295.0" layoutY="119.0" prefHeight="38.0" prefWidth="131.0" text="No. Of Seats :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="196.0" prefHeight="38.0" prefWidth="131.0" text="Status :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="295.0" layoutY="196.0" prefHeight="38.0" prefWidth="131.0" text="Service :">
+         <font>
+            <Font name="Tahoma Bold" size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblBus" layoutX="43.0" layoutY="308.0" prefHeight="266.0" prefWidth="465.0">
+        <columns>
+          <TableColumn fx:id="colRegNumber" prefWidth="118.0" text="Reg Number" />
+          <TableColumn fx:id="colSeats" prefWidth="102.0" text="No Of Seats" />
+            <TableColumn fx:id="colStatus" prefWidth="116.0" text="Status" />
+            <TableColumn fx:id="colService" prefWidth="128.0" text="Service" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnClear" alignment="CENTER_RIGHT" layoutX="544.0" layoutY="135.0" mnemonicParsing="false" onAction="#clearOnAction" prefHeight="44.0" prefWidth="131.0" style="-fx-background-radius: 50px; -fx-background-color: #212121;" text="Clear" textFill="#dad7d7">
+         <font>
+            <Font name="Tahoma Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnSave" alignment="CENTER_RIGHT" layoutX="547.0" layoutY="193.0" mnemonicParsing="false" onAction="#saveOnAction" prefHeight="44.0" prefWidth="131.0" style="-fx-background-radius: 50px; -fx-background-color: #212121;" text="Save" textFill="#dad7d7">
+         <font>
+            <Font name="Tahoma Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnUpdate" alignment="CENTER_RIGHT" layoutX="544.0" layoutY="249.0" mnemonicParsing="false" onAction="#updateOnAction" prefHeight="44.0" prefWidth="131.0" style="-fx-background-radius: 50px; -fx-background-color: #212121;" text="Update" textFill="#dad7d7">
+         <font>
+            <Font name="Tahoma Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnDelete" alignment="CENTER_RIGHT" layoutX="544.0" layoutY="303.0" mnemonicParsing="false" onAction="#deleteOnAction" prefHeight="44.0" prefWidth="131.0" style="-fx-background-radius: 50px; -fx-background-color: #212121;" text="Delete" textFill="#dad7d7">
+         <font>
+            <Font name="Tahoma Bold" size="15.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="38.0" fitWidth="44.0" layoutX="560.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/clear.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="45.0" layoutX="560.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/save.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="44.0" layoutX="557.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/update.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="560.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/delete.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="157.0" fitWidth="131.0" layoutX="533.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/icons8-get-on-bus-50.png" />
+         </image>
+      </ImageView>
+      <ComboBox fx:id="cmbSeats" layoutX="295.0" layoutY="156.0" prefHeight="30.0" prefWidth="173.0" />
+      <ComboBox fx:id="cmbService" layoutX="295.0" layoutY="228.0" prefHeight="30.0" prefWidth="173.0" />
+      <ComboBox fx:id="cmbStatus" layoutX="43.0" layoutY="228.0" prefHeight="30.0" prefWidth="180.0" />
+   </children>
+</AnchorPane>

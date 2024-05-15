@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="524.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.manathungatours.controller.LoginFormController">
+   <children>
+      <ImageView fitHeight="528.0" fitWidth="691.0">
+         <image>
+            <Image url="@../asserts/icon/annie-spratt-tG822f1XzT4-unsplash1.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="rootNode" layoutX="239.0" layoutY="94.0" prefHeight="356.0" prefWidth="384.0" style="-fx-background-color: #212121;">
+         <children>
+            <Label layoutX="72.0" layoutY="14.0" prefHeight="55.0" prefWidth="128.0" text="Login" textFill="#e4dede">
+               <font>
+                  <Font name="Tahoma Bold" size="36.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="82.0" layoutY="64.0" prefHeight="11.0" prefWidth="82.0" style="-fx-background-color: #4caf50;" />
+            <TextField fx:id="txtUserName" layoutX="118.0" layoutY="124.0" onKeyReleased="#idOnKeyReleased" prefHeight="40.0" prefWidth="226.0" promptText="Username" />
+            <PasswordField fx:id="pwdPassword" layoutX="116.0" layoutY="192.0" onAction="#dashboardOnAction" onKeyPressed="#loadDashBoardOnAction" onKeyReleased="#passwordOnKeyReleased" prefHeight="40.0" prefWidth="226.0" promptText="Password" />
+            <Button fx:id="btnLogin" layoutX="229.0" layoutY="250.0" mnemonicParsing="false" onAction="#loginOnAction" prefHeight="46.0" prefWidth="128.0" style="-fx-background-color: #4caf50; -fx-background-radius: 90;" text="Login">
+               <font>
+                  <Font name="Tahoma Bold" size="14.0" />
+               </font></Button>
+            <ImageView fitHeight="46.0" fitWidth="48.0" layoutX="49.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asserts/icon/customer.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="46.0" fitWidth="46.0" layoutX="49.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asserts/icon/icons8-password-64.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnExit" layoutX="89.0" layoutY="250.0" mnemonicParsing="false" onAction="#lExitOnAction" prefHeight="46.0" prefWidth="128.0" style="-fx-background-color: #b71c1c; -fx-background-radius: 90;" text="Exit">
+               <font>
+                  <Font name="Tahoma Bold" size="14.0" />
+               </font>
+            </Button>
+            <Hyperlink fx:id="hypSignUp" layoutX="268.0" layoutY="319.0" onAction="#signUpOnAction" prefHeight="24.0" prefWidth="104.0" text="SignUp Here" textFill="#4caf50">
+               <font>
+                  <Font name="Tahoma Bold" size="14.0" />
+               </font>
+            </Hyperlink>
+            <Label layoutX="122.0" layoutY="319.0" prefHeight="24.0" prefWidth="134.0" text="Don't have an account ?" textFill="#4caf50">
+               <font>
+                  <Font name="Tahoma Bold" size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Pane layoutY="-2.0" prefHeight="81.0" prefWidth="431.0" style="-fx-background-color: #212121;">
+         <children>
+            <Label alignment="BASELINE_RIGHT" layoutX="54.0" layoutY="7.0" prefHeight="68.0" prefWidth="377.0" text="Manathunga Tours" textFill="#ebe4e4">
+               <font>
+                  <Font name="Agency FB Bold" size="55.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="62.0" fitWidth="71.0" layoutX="8.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asserts/icon/icons8-bus-50.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

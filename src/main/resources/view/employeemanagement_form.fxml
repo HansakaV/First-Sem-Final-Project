@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="605.0" prefWidth="703.0" style="-fx-background-color: #4caf50;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.manathungatours.controller.EmployeeManagementFormController">
+   <children>
+      <Pane layoutX="78.0" layoutY="14.0" prefHeight="105.0" prefWidth="554.0" style="-fx-background-color: #212121; -fx-background-radius: 50px;">
+         <children>
+            <Label alignment="CENTER" layoutX="85.0" layoutY="7.0" prefHeight="89.0" prefWidth="427.0" text="Employee Management" textFill="#f2f0f0">
+               <font>
+                  <Font name="Agency FB Bold" size="53.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="24.0" layoutY="144.0" prefHeight="394.0" prefWidth="205.0" style="-fx-background-color: #212121; -fx-background-radius: 50px;">
+         <children>
+            <Button fx:id="btnDrivers" layoutX="34.0" layoutY="54.0" mnemonicParsing="false" onAction="#driverManageOnAction" prefHeight="73.0" prefWidth="146.0" style="-fx-background-color: #000000; -fx-border-color: #fff7f7; -fx-border-radius: 10px;" text="Drivers" textFill="#fff7f7">
+               <font>
+                  <Font name="Agency FB Bold" size="27.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="123.0" fitWidth="121.0" layoutX="47.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asserts/icon/icons8-driver-50.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="25.0" layoutY="309.0" prefHeight="56.0" prefWidth="157.0" text="Driver Management" textFill="#f2eded">
+               <font>
+                  <Font name="Book Antiqua Bold Italic" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="249.0" layoutY="144.0" prefHeight="394.0" prefWidth="205.0" style="-fx-background-color: #212121; -fx-background-radius: 50px;">
+         <children>
+            <Button fx:id="btnConductors" layoutX="34.0" layoutY="48.0" mnemonicParsing="false" onAction="#conductorManagementOnAction" prefHeight="73.0" prefWidth="146.0" style="-fx-background-color: #000000; -fx-border-color: #fff7f7; -fx-border-radius: 10px;" text="Conductors" textFill="#fff7f7">
+               <font>
+                  <Font name="Agency FB Bold" size="27.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="127.0" fitWidth="146.0" layoutX="39.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asserts/icon/customer.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="24.0" layoutY="306.0" prefHeight="56.0" prefWidth="164.0" text="Conductor Management" textFill="#f2eded">
+               <font>
+                  <Font name="Book Antiqua Bold Italic" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="474.0" layoutY="144.0" prefHeight="394.0" prefWidth="205.0" style="-fx-background-color: #212121; -fx-background-radius: 50px;">
+         <children>
+            <Button fx:id="btnEngineers" layoutX="30.0" layoutY="40.0" mnemonicParsing="false" onAction="#EngineerManagementOnAction" prefHeight="73.0" prefWidth="146.0" style="-fx-background-color: #000000; -fx-border-color: #fff7f7; -fx-border-radius: 10px;" text="Engineers" textFill="#fff7f7">
+               <font>
+                  <Font name="Agency FB Bold" size="27.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="138.0" fitWidth="153.0" layoutX="38.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asserts/icon/icons8-engineer-80.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="29.0" layoutY="309.0" prefHeight="56.0" prefWidth="157.0" text="Enginners Management" textFill="#f2eded">
+               <font>
+                  <Font name="Book Antiqua Bold Italic" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button fx:id="btnExit" alignment="CENTER_RIGHT" layoutX="562.0" layoutY="548.0" mnemonicParsing="false" onAction="#exitOnAction" prefHeight="43.0" prefWidth="127.0" text="Exit">
+         <font>
+            <Font name="Tahoma" size="21.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="37.0" fitWidth="38.0" layoutX="577.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icon/exit.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
