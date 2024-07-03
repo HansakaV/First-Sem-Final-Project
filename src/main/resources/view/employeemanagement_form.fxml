@@ -28,7 +28,7 @@
             </Button>
             <ImageView fitHeight="123.0" fitWidth="121.0" layoutX="47.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../asserts/icon/icons8-driver-50.png" />
+                  <Image url="@../assests/icons8-driver-50.png" />
                </image>
             </ImageView>
             <Label layoutX="25.0" layoutY="309.0" prefHeight="56.0" prefWidth="157.0" text="Driver Management" textFill="#f2eded">
@@ -47,7 +47,7 @@
             </Button>
             <ImageView fitHeight="127.0" fitWidth="146.0" layoutX="39.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../asserts/icon/customer.png" />
+                  <Image url="@../assests/customer.png" />
                </image>
             </ImageView>
             <Label layoutX="24.0" layoutY="306.0" prefHeight="56.0" prefWidth="164.0" text="Conductor Management" textFill="#f2eded">
@@ -66,7 +66,7 @@
             </Button>
             <ImageView fitHeight="138.0" fitWidth="153.0" layoutX="38.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../asserts/icon/icons8-engineer-80.png" />
+                  <Image url="@../assests/icons8-engineer-80.png" />
                </image>
             </ImageView>
             <Label layoutX="29.0" layoutY="309.0" prefHeight="56.0" prefWidth="157.0" text="Enginners Management" textFill="#f2eded">
@@ -76,15 +76,5 @@
             </Label>
          </children>
       </Pane>
-      <Button fx:id="btnExit" alignment="CENTER_RIGHT" layoutX="562.0" layoutY="548.0" mnemonicParsing="false" onAction="#exitOnAction" prefHeight="43.0" prefWidth="127.0" text="Exit">
-         <font>
-            <Font name="Tahoma" size="21.0" />
-         </font>
-      </Button>
-      <ImageView fitHeight="37.0" fitWidth="38.0" layoutX="577.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../asserts/icon/exit.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

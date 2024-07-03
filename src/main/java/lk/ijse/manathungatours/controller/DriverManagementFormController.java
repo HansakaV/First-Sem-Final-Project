@@ -10,14 +10,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.manathungatours.Util.Regex;
+import lk.ijse.manathungatours.dao.custom.impl.driverDaoImpl;
 import lk.ijse.manathungatours.model.Conductor;
 import lk.ijse.manathungatours.model.Driver;
+import lk.ijse.manathungatours.model.DriverDTO;
 import lk.ijse.manathungatours.model.tm.DriverTm;
 import lk.ijse.manathungatours.repository.ConductorRepo;
 import lk.ijse.manathungatours.repository.DriverRepo;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DriverManagementFormController {
@@ -77,24 +80,12 @@ public class DriverManagementFormController {
     }
 
     private void loadAllDrivers() {
-        ObservableList<DriverTm> obList = FXCollections.observableArrayList();
-
         try {
-            List<Driver> driverList = DriverRepo.getAll();
-            for (Driver driver : driverList) {
-              DriverTm tm = new DriverTm(
-                      driver.getId(),
-                      driver.getName(),
-                      driver.getAddress(),
-                      driver.getTel()
-
-
-                );
-
-                obList.add(tm);
+            driverDaoImpl driverDao = new driverDaoImpl();
+            ArrayList<DriverDTO> driverList = driverDao.getAll();
+            for (DriverDTO dto : driverList) {
+                tblDrivers.getItems().add(new DriverTm(dto.getId(), dto.getName(), dto.getAddress(), dto.getTel()));
             }
-
-            tblDrivers.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -126,7 +117,8 @@ public class DriverManagementFormController {
         String id = txtId.getText();
 
         try {
-            boolean isDeleted = DriverRepo.delete(id);
+            driverDaoImpl driverDao = new driverDaoImpl();
+            boolean isDeleted = driverDao.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Removed From System!").show();
             }
@@ -144,10 +136,10 @@ public class DriverManagementFormController {
         String address = txtAddress.getText();
         String tel = txtTel.getText();
 
-        Driver driver = new Driver(id, name,address, tel);
-
+        DriverDTO driver = new DriverDTO(id, name,address, tel);
         try {
-            boolean isSaved = DriverRepo.save(driver);
+            driverDaoImpl driverDao = new driverDaoImpl();
+            boolean isSaved = driverDao.save(driver);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Added to System!").show();
                 clearFields();
@@ -165,10 +157,10 @@ public class DriverManagementFormController {
         String address = txtAddress.getText();
         String tel = txtTel.getText();
 
-        Driver driver = new Driver(id, name, address, tel);
-
+        DriverDTO driver = new DriverDTO(id, name, address, tel);
         try {
-            boolean isUpdated = DriverRepo.update(driver);
+            driverDaoImpl driverDao = new driverDaoImpl();
+            boolean isUpdated = driverDao.update(driver);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Update Done!").show();
             }
@@ -181,12 +173,15 @@ public class DriverManagementFormController {
     public void searchOnAction(ActionEvent actionEvent) throws SQLException {
         String id = txtId.getText();
 
-        Driver driver = DriverRepo.searchById(id);
+        driverDaoImpl driverDao = new driverDaoImpl();
+       ArrayList<DriverDTO>  driver = driverDao.search(id);
         if (driver != null) {
-            txtId.setText(driver.getId());
-            txtName.setText(driver.getName());
-            txtAddress.setText(driver.getAddress());
-            txtTel.setText(driver.getTel());
+            for (DriverDTO dto : driver) {
+                txtId.setText(dto.getId());
+                txtName.setText(dto.getName());
+                txtAddress.setText(dto.getAddress());
+                txtTel.setText(dto.getTel());
+            }
         } else {
             new Alert(Alert.AlertType.INFORMATION, "OOPS!! Not Found!").show();
         }

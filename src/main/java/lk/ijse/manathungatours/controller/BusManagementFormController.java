@@ -9,7 +9,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.manathungatours.Util.Regex;
+import lk.ijse.manathungatours.dao.custom.impl.busDaoImpl;
 import lk.ijse.manathungatours.model.Bus;
+import lk.ijse.manathungatours.model.BusDTO;
 import lk.ijse.manathungatours.model.tm.BusTm;
 import lk.ijse.manathungatours.repository.BusRepo;
 
@@ -95,23 +97,12 @@ public class BusManagementFormController {
     }
 
     private void loadAllBuses() {
-        ObservableList<BusTm> obList = FXCollections.observableArrayList();
-
         try {
-            List<Bus> busList = BusRepo.getAll();
-            for (Bus bus : busList) {
-                BusTm tm = new BusTm(
-                        bus.getRegNumber(),
-                        bus.getSeats(),
-                        bus.getStatus(),
-                        bus.getService()
-
-                );
-
-                obList.add(tm);
+            busDaoImpl busDao = new busDaoImpl();
+            ArrayList<BusDTO> dtos = busDao.getAll();
+            for (BusDTO dto : dtos) {
+                tblBus.getItems().add(new BusTm(dto.getRegNumber(),dto.getSeats(),dto.getStatus(),dto.getService()));
             }
-
-            tblBus.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -182,7 +173,8 @@ public class BusManagementFormController {
         String id = txtRegNumber.getText();
 
         try {
-            boolean isDeleted = BusRepo.delete(id);
+           busDaoImpl busDao =  new busDaoImpl();
+            boolean isDeleted = busDao.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Removed From System!").show();
             }
@@ -203,10 +195,11 @@ public class BusManagementFormController {
         String status = cmbStatus.getValue().toString();
         String service = cmbService.getValue().toString();
 
-        Bus bus = new Bus(regNumber, seats, status, service);
+        BusDTO bus = new BusDTO(regNumber, seats, status, service);
 
         try {
-            boolean isSaved = BusRepo.save(bus);
+            busDaoImpl busDao = new busDaoImpl();
+            boolean isSaved = busDao.save(bus);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Added to System!").show();
                 clearFields();
@@ -220,16 +213,21 @@ public class BusManagementFormController {
     void searchOnAction(ActionEvent event) throws SQLException {
         String regNumber = txtRegNumber.getText();
 
-        Bus bus = BusRepo.searchById(regNumber);
-        if (bus != null) {
-            txtRegNumber.setText(bus.getRegNumber());
-            cmbSeats.setValue(bus.getSeats());
-            cmbStatus.setValue(bus.getStatus());
-            cmbService.setValue(bus.getService());
-        } else {
-            new Alert(Alert.AlertType.INFORMATION, "OOPS!! Not Found!").show();
+        busDaoImpl busDao = new busDaoImpl();
+       ArrayList<BusDTO>  dtos =  busDao.search(regNumber);
+
+        if (dtos != null) {
+            for (BusDTO dto : dtos) {
+                txtRegNumber.setText(dto.getRegNumber());
+                txtSeats.setText(dto.getSeats());
+                txtStatus.setText(dto.getStatus());
+                txtService.setText(dto.getService());
+            }
+            } else{
+                new Alert(Alert.AlertType.INFORMATION, "OOPS!! Not Found!").show();
+            }
         }
-    }
+
 
     @FXML
     void updateOnAction(ActionEvent event) {
@@ -238,10 +236,11 @@ public class BusManagementFormController {
         String status = cmbStatus.getValue().toString();
         String service = cmbService.getValue().toString();
 
-        Bus bus = new Bus(id, seats, status, service);
+        BusDTO bus = new BusDTO(id, seats, status, service);
 
         try {
-            boolean isUpdated = BusRepo.update(bus);
+            busDaoImpl busDao = new busDaoImpl();
+            boolean isUpdated = busDao.update(bus);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Update Done!").show();
             }

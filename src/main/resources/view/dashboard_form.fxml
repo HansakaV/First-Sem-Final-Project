@@ -18,9 +18,9 @@
                   <Font name="Tahoma Bold" size="12.0" />
                </font>
             </Button>
-            <ImageView fitHeight="34.0" fitWidth="38.0" layoutX="39.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="49.0" fitWidth="40.0" layoutX="39.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../asserts/icon/icons8-bus-50.png" />
+                  <Image url="@../assests/icons8-bus-50.png" />
                </image>
             </ImageView>
             <Button fx:id="btnLaborManage" alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="24.0" layoutY="175.0" mnemonicParsing="false" onAction="#laborManageOnAction" prefHeight="66.0" prefWidth="171.0" style="-fx-background-color: #4caf50; -fx-background-radius: 90;" text="Labor Management">
@@ -28,9 +28,9 @@
                   <Font name="Tahoma Bold" size="12.0" />
                </font>
             </Button>
-            <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="38.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="36.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../asserts/icon/icons8-labor-64.png" />
+                  <Image url="@../assests/icons8-engineer-80.png" />
                </image>
             </ImageView>
             <Button fx:id="btnPassengerManage" alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="24.0" layoutY="261.0" mnemonicParsing="false" onAction="#passengerManageOnAction" prefHeight="66.0" prefWidth="171.0" style="-fx-background-color: #4caf50; -fx-background-radius: 90;" text="Passenger Manage ">
@@ -38,9 +38,9 @@
                   <Font name="Tahoma Bold" size="12.0" />
                </font>
             </Button>
-            <ImageView fitHeight="34.0" fitWidth="40.0" layoutX="36.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="36.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../asserts/icon/icons8-queue-50.png" />
+                  <Image url="@../assests/customer.png" />
                </image>
             </ImageView>
             <Button fx:id="btnBookingManage" alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="24.0" layoutY="350.0" mnemonicParsing="false" onAction="#bookingManageOnAction" prefHeight="66.0" prefWidth="171.0" style="-fx-background-color: #4caf50; -fx-background-radius: 90;" text="Bookings Manage">
@@ -48,9 +48,9 @@
                   <Font name="Tahoma Bold" size="12.0" />
                </font>
             </Button>
-            <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="36.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="40.0" fitWidth="42.0" layoutX="36.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../asserts/icon/icons8-booking-50.png" />
+                  <Image url="@../assests/icons8-booking-50.png" />
                </image>
             </ImageView>
             <Button fx:id="btnRouteManage" alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="24.0" layoutY="433.0" mnemonicParsing="false" onAction="#routeManageOnAction" prefHeight="66.0" prefWidth="171.0" style="-fx-background-color: #4caf50; -fx-background-radius: 90;" text="Routes Manage">
@@ -63,14 +63,14 @@
                   <Font name="Tahoma Bold" size="12.0" />
                </font>
             </Button>
-            <ImageView fitHeight="34.0" fitWidth="42.0" layoutX="39.0" layoutY="449.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="42.0" fitWidth="49.0" layoutX="42.0" layoutY="449.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../asserts/icon/icons8-near-me-80.png" />
+                  <Image url="@../assests/icons8-get-on-bus-50.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="39.0" layoutY="527.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="49.0" fitWidth="40.0" layoutX="39.0" layoutY="527.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../asserts/icon/icons8-profit-50%20(1).png" />
+                  <Image url="@../assests/icons8-profit-50%20(1).png" />
                </image>
             </ImageView>
             <Button fx:id="btnDashBoard" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#dashBoardOnAction" prefHeight="66.0" prefWidth="171.0" style="-fx-background-color: #4caf50; -fx-background-radius: 90;" text="Dash Board">
@@ -80,7 +80,7 @@
             </Button>
             <ImageView fitHeight="49.0" fitWidth="69.0" layoutX="41.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../asserts/icon/dashboard.png" />
+                  <Image url="@../assests/dashboard.png" />
                </image>
             </ImageView>
          </children>
@@ -95,7 +95,7 @@
             </Button>
             <ImageView fitHeight="49.0" fitWidth="42.0" layoutX="542.0" layoutY="537.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../asserts/icon/icons8-logout-50.png" />
+                  <Image url="@../assests/icons8-logout-50.png" />
                </image>
             </ImageView>
             <Label layoutX="8.0" layoutY="70.0" prefHeight="66.0" prefWidth="328.0" text="Hello Welcome!">
@@ -115,9 +115,9 @@
                         <Font name="Agency FB Bold" size="20.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="79.0" fitWidth="87.0" layoutX="42.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="87.0" fitWidth="93.0" layoutX="42.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asserts/icon/icons8-bus-50.png" />
+                        <Image url="@../assests/icons8-bus-50.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="lblBus" alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="63.0" prefHeight="34.0" prefWidth="101.0" textAlignment="CENTER" textFill="#e4d6d6">
@@ -151,7 +151,7 @@
                   </Label>
                   <ImageView fitHeight="87.0" fitWidth="93.0" layoutX="55.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asserts/icon/icons8-labor-64.png" />
+                        <Image url="@../assests/icons8-engineer-80.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="lblDrivers" alignment="CENTER" contentDisplay="CENTER" layoutX="44.0" layoutY="47.0" prefHeight="34.0" prefWidth="101.0" textAlignment="CENTER" textFill="#e4d6d6">
@@ -178,9 +178,9 @@
                         <Font name="Agency FB Bold" size="20.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="87.0" fitWidth="87.0" layoutX="46.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="95.0" fitWidth="109.0" layoutX="46.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asserts/icon/icons8-profit-50%20(1).png" />
+                        <Image url="@../assests/icons8-profit-50%20(1).png" />
                      </image>
                   </ImageView>
                   <Label fx:id="lblIncome" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="63.0" prefHeight="60.0" prefWidth="121.0" textAlignment="CENTER" textFill="#e4d6d6">
@@ -206,15 +206,18 @@
                   <Image url="@../asserts/icon/icons8-setting-50.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnUser" layoutX="611.0" layoutY="15.0" mnemonicParsing="false" onAction="#userOnAction" prefHeight="49.0" prefWidth="59.0" style="-fx-background-radius: 100px; -fx-background-color: #4caf50;" />
-            <ImageView fitHeight="60.0" fitWidth="59.0" layoutX="630.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../asserts/icon/icons8-user-100.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="lblName" alignment="BOTTOM_RIGHT" contentDisplay="CENTER" layoutX="590.0" layoutY="67.0" prefHeight="34.0" prefWidth="101.0" textAlignment="CENTER" textFill="#e4d6d6">
+            <Button fx:id="btnUser" alignment="BASELINE_RIGHT" layoutX="549.0" layoutY="15.0" mnemonicParsing="false" onAction="#userOnAction" prefHeight="49.0" prefWidth="133.0" style="-fx-background-radius: 100px; -fx-background-color: #4caf50;" text="Settings">
                <font>
                   <Font name="Agency FB Bold" size="22.0" />
+               </font></Button>
+            <ImageView fitHeight="49.0" fitWidth="59.0" layoutX="556.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assests/icons8-setting-50.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblName" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="590.0" layoutY="62.0" prefHeight="42.0" prefWidth="101.0" textAlignment="CENTER" textFill="#e4d6d6">
+               <font>
+                  <Font name="Agency FB Bold" size="24.0" />
                </font>
             </Label>
             <Label layoutX="14.0" layoutY="15.0" prefHeight="42.0" prefWidth="109.0" text="Date      :">

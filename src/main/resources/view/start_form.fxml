@@ -12,7 +12,7 @@
    <children>
       <ImageView fx:id="startPane" fitHeight="464.0" fitWidth="707.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/annie-spratt-tG822f1XzT4-unsplash1.jpg" />
+            <Image url="@../assests/annie-spratt-tG822f1XzT4-unsplash1.jpg" />
          </image>
       </ImageView>
       <Pane layoutX="15.0" layoutY="14.0" prefHeight="115.0" prefWidth="450.0" style="-fx-background-color: #212121;">
@@ -36,7 +36,7 @@
       </Button>
       <ImageView fitHeight="49.0" fitWidth="66.0" layoutX="452.0" layoutY="384.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/con.png" />
+            <Image url="@../assests/icons8-login-50.png" />
          </image>
       </ImageView>
    </children>

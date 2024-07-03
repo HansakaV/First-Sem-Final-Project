@@ -3,6 +3,7 @@ package lk.ijse.manathungatours.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -329,7 +330,22 @@ public class DashboardFormController {
     public void settingsOnAction(ActionEvent actionEvent) {
     }
 
-    public void userOnAction(ActionEvent actionEvent) {
+    public void userOnAction(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/view/user_form.fxml"));
+        AnchorPane anchorPane = loader.load();
+
+        UserFormController userFormController =loader.getController();
+        userFormController.setUserID(userId);
+
+        Scene scene = new Scene(anchorPane);
+        Stage stage = new Stage();
+
+        stage.setScene(scene);
+        stage.setScene(anchorPane.getScene());
+        stage.centerOnScreen();
+        stage.setTitle("Dashboard Form");
+        stage.show();
+        mainNode.getScene().getWindow().hide();
     }
 
     public void dashBoardOnAction(ActionEvent actionEvent) throws IOException {

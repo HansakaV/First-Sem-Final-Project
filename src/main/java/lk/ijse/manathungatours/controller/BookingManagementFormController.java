@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.manathungatours.dao.custom.impl.busDaoImpl;
 import lk.ijse.manathungatours.db.DbConnection;
 import lk.ijse.manathungatours.model.*;
 import lk.ijse.manathungatours.model.tm.BookingTm;
@@ -15,6 +16,7 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -120,7 +122,8 @@ public class BookingManagementFormController {
     private void getBuses() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> busList = BusRepo.getAvailbleBuses();
+            busDaoImpl busDao = new busDaoImpl();
+            ArrayList<String> busList = busDao.checkAvailability();
 
             for (String code : busList) {
                 obList.add(code);

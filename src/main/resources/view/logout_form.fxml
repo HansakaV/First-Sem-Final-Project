@@ -12,7 +12,7 @@
    <children>
       <ImageView fx:id="rootNode" fitHeight="457.0" fitWidth="656.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/annie-spratt-tG822f1XzT4-unsplash1.jpg" />
+            <Image url="@../assests/annie-spratt-tG822f1XzT4-unsplash1.jpg" />
          </image>
       </ImageView>
       <Pane layoutX="14.0" layoutY="14.0" prefHeight="83.0" prefWidth="391.0" style="-fx-background-color: #212121; -fx-background-radius: 30px;">
@@ -31,7 +31,7 @@
       </Button>
       <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="414.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/icons8-login-50.png" />
+            <Image url="@../assests/icons8-login-50.png" />
          </image>
       </ImageView>
       <Button fx:id="btnexit" alignment="BASELINE_LEFT" layoutX="480.0" layoutY="352.0" mnemonicParsing="false" onAction="#exitOnAction" prefHeight="71.0" prefWidth="155.0" style="-fx-background-color: #4caf50 #607d8b; -fx-background-radius: 20px; -fx-border-width: 2px; -fx-border-color: #212121; -fx-border-radius: 20px;" text="EXIT">
@@ -41,7 +41,7 @@
       </Button>
       <ImageView fitHeight="43.0" fitWidth="114.0" layoutX="558.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/icons8-logout-50.png" />
+            <Image url="@../assests/exit.png" />
          </image>
       </ImageView>
       <Pane layoutX="14.0" layoutY="113.0" prefHeight="89.0" prefWidth="325.0" style="-fx-background-color: #212121;">

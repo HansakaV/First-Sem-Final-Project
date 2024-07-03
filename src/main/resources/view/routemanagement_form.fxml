@@ -52,14 +52,10 @@
         <columns>
           <TableColumn fx:id="colRoute" prefWidth="162.0" text="Route" />
           <TableColumn fx:id="colBus" prefWidth="111.0" text="Used Bus" />
-            <TableColumn fx:id="colDriver" prefWidth="99.0" text="Driver Id" />
-            <TableColumn fx:id="colConductor" prefWidth="92.0" text="Conductor Id" />
+            <TableColumn fx:id="colDriver" prefWidth="99.0" text="Conductor Id" />
+            <TableColumn fx:id="colConductor" prefWidth="92.0" text="Driver Id" />
         </columns>
       </TableView>
-      <Button fx:id="btnBack" alignment="CENTER_RIGHT" layoutX="540.0" layoutY="547.0" mnemonicParsing="false" onAction="#backOnAction" prefHeight="44.0" prefWidth="138.0" style="-fx-background-radius: 50px; -fx-background-color: #d84315;" text="Back" textFill="#dad7d7">
-         <font>
-            <Font name="Tahoma Bold" size="22.0" />
-         </font></Button>
       <Button fx:id="btnClear" alignment="CENTER_RIGHT" layoutX="544.0" layoutY="135.0" mnemonicParsing="false" onAction="#clearOnAction" prefHeight="44.0" prefWidth="131.0" style="-fx-background-radius: 50px; -fx-background-color: #212121;" text="Clear" textFill="#dad7d7">
          <font>
             <Font name="Tahoma Bold" size="15.0" />
@@ -82,22 +78,22 @@
       </Button>
       <ImageView fitHeight="38.0" fitWidth="44.0" layoutX="560.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/clear.png" />
+            <Image url="@../assests/clear.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="45.0" layoutX="560.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/save.png" />
+            <Image url="@../assests/save.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="44.0" layoutX="557.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/update.png" />
+            <Image url="@../assests/update.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="560.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/delete.png" />
+            <Image url="@../assests/delete.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="560.0" layoutY="550.0" pickOnBounds="true" preserveRatio="true">
@@ -105,9 +101,9 @@
             <Image url="@../asserts/icon/exit.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="129.0" fitWidth="131.0" layoutX="533.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="158.0" fitWidth="143.0" layoutX="533.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/icons8-get-on-bus-50.png" />
+            <Image url="@../assests/icons8-get-on-bus-50.png" />
          </image>
       </ImageView>
       <ComboBox fx:id="cmbBus" layoutX="289.0" layoutY="151.0" prefHeight="30.0" prefWidth="170.0" promptText="Select Bus" />

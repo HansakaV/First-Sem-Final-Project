@@ -88,27 +88,27 @@
       </Button>
       <ImageView fitHeight="38.0" fitWidth="44.0" layoutX="560.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/clear.png" />
+            <Image url="@../assests/clear.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="45.0" layoutX="560.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/save.png" />
+            <Image url="@../assests/save.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="44.0" layoutX="560.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/update.png" />
+            <Image url="@../assests/update.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="560.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/delete.png" />
+            <Image url="@../assests/delete.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="185.0" fitWidth="131.0" layoutX="544.0" layoutY="377.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/icons8-profit-50%20(1).png" />
+            <Image url="@../assests/icons8-get-on-bus-50.png" />
          </image>
       </ImageView>
       <ComboBox fx:id="cmbBus" layoutX="43.0" layoutY="153.0" prefHeight="30.0" prefWidth="180.0" promptText="SelectBus" />

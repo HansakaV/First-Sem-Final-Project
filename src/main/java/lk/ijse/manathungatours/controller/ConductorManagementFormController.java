@@ -10,14 +10,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.manathungatours.Util.Regex;
+import lk.ijse.manathungatours.dao.custom.impl.conductorDaoImpl;
 import lk.ijse.manathungatours.model.Bus;
 import lk.ijse.manathungatours.model.Conductor;
+import lk.ijse.manathungatours.model.ConductorDTO;
 import lk.ijse.manathungatours.model.tm.ConductorTm;
 import lk.ijse.manathungatours.repository.BusRepo;
 import lk.ijse.manathungatours.repository.ConductorRepo;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConductorManagementFormController {
@@ -86,23 +89,12 @@ public class ConductorManagementFormController {
     }
 
     private void loadAllConductors() {
-        ObservableList<ConductorTm> obList = FXCollections.observableArrayList();
-
         try {
-            List<Conductor> conductorList = ConductorRepo.getAll();
-            for (Conductor conductor : conductorList) {
-                ConductorTm tm = new ConductorTm(
-                        conductor.getId(),
-                        conductor.getName(),
-                        conductor.getAddress(),
-                        conductor.getTel()
-
-                );
-
-                obList.add(tm);
+            conductorDaoImpl conductorDao = new conductorDaoImpl();
+            ArrayList<ConductorDTO> conductorList = conductorDao.getAll();
+            for (ConductorDTO dto : conductorList) {
+                tblconductors.getItems().add(new ConductorTm(dto.getId(), dto.getName(), dto.getAddress(), dto.getTel()));
             }
-
-            tblconductors.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -135,7 +127,8 @@ public class ConductorManagementFormController {
         String id = txtid.getText();
 
         try {
-            boolean isDeleted = ConductorRepo.delete(id);
+            conductorDaoImpl conductorDao = new conductorDaoImpl();
+            boolean isDeleted = conductorDao.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Removed From System!").show();
             }
@@ -153,10 +146,10 @@ public class ConductorManagementFormController {
         String address = txtaddress.getText();
         String tel = txttel.getText();
 
-        Conductor conductor = new Conductor(id, name,address, tel);
-
+        ConductorDTO conductor = new ConductorDTO(id, name,address, tel);
         try {
-            boolean isSaved = ConductorRepo.save(conductor);
+            conductorDaoImpl conductorDao = new conductorDaoImpl();
+            boolean isSaved = conductorDao.save(conductor);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Added to System!").show();
                 clearFields();
@@ -164,7 +157,6 @@ public class ConductorManagementFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @FXML
@@ -174,10 +166,10 @@ public class ConductorManagementFormController {
         String address = txtaddress.getText();
         String tel = txttel.getText();
 
-        Conductor conductor = new Conductor(id, name, address, tel);
-
+        ConductorDTO conductor = new ConductorDTO(id, name, address, tel);
         try {
-            boolean isUpdated = ConductorRepo.update(conductor);
+            conductorDaoImpl conductorDao = new conductorDaoImpl();
+            boolean isUpdated = conductorDao.update(conductor);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Update Done!").show();
             }
@@ -189,16 +181,18 @@ public class ConductorManagementFormController {
     void searchOnAction(ActionEvent event) throws SQLException {
         String id = txtid.getText();
 
-       Conductor conductor = ConductorRepo.searchById(id);
+        conductorDaoImpl conductorDao = new conductorDaoImpl();
+       ArrayList<ConductorDTO> conductor = conductorDao.search(id);
         if (conductor != null) {
-            txtid.setText(conductor.getId());
-            txtname.setText(conductor.getName());
-            txtaddress.setText(conductor.getAddress());
-            txttel.setText(conductor.getTel());
+            for (ConductorDTO dto : conductor) {
+                txtid.setText(dto.getId());
+                txtname.setText(dto.getName());
+                txtaddress.setText(dto.getAddress());
+                txttel.setText(dto.getTel());
+            }
         } else {
             new Alert(Alert.AlertType.INFORMATION, "OOPS!! Not Found!").show();
         }
-
     }
 
     public void nameOnRelaesed(KeyEvent keyEvent) {

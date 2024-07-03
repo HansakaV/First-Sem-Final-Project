@@ -57,7 +57,7 @@
       </Button>
       <ImageView fitHeight="149.0" fitWidth="162.0" layoutX="380.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/icons8-get-on-bus-50.png" />
+            <Image url="@../assests/icons8-get-on-bus-50.png" />
          </image>
       </ImageView>
       <Button fx:id="btnLogin" layoutX="380.0" layoutY="339.0" mnemonicParsing="false" onAction="#loginOnAction" prefHeight="47.0" prefWidth="149.0" style="-fx-background-color: #212121; -fx-background-radius: 50px;" text="Login" textFill="WHITE">

@@ -7,12 +7,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.manathungatours.dao.custom.impl.busDaoImpl;
 import lk.ijse.manathungatours.model.Financial;
 import lk.ijse.manathungatours.model.tm.FinancialTm;
 import lk.ijse.manathungatours.repository.BusRepo;
 import lk.ijse.manathungatours.repository.FinancialRepo;
 
+import java.sql.Array;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FinancialManagementFormController {
@@ -82,7 +85,8 @@ public class FinancialManagementFormController {
     private void getBuses() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> busList = BusRepo.getCodes();
+           busDaoImpl busDao =  new busDaoImpl();
+            ArrayList<String> busList = busDao.getCodes();
 
             for (String code : busList) {
                 obList.add(code);

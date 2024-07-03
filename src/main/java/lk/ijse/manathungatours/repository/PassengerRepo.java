@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PassengerRepo {
-    public static boolean save(Passenger passenger) throws SQLException {
+   /* public static boolean save(Passenger passenger) throws SQLException {
         String sql = "INSERT INTO passengers VALUES(?, ?, ?, ?)";
 
         Connection connection = DbConnection.getInstance().getConnection();
@@ -23,9 +23,9 @@ public class PassengerRepo {
         pstm.setObject(4, passenger.getTel());
 
         return pstm.executeUpdate() > 0;
-    }
+    }*/
 
-    public static Passenger searchById(String id) throws SQLException {
+   /* public static Passenger searchById(String id) throws SQLException {
         String sql = "SELECT * FROM passengers WHERE  passenger_id = ?";
 
         Connection connection = DbConnection.getInstance().getConnection();
@@ -45,9 +45,9 @@ public class PassengerRepo {
         }
 
         return null;
-    }
+    }*/
 
-    public static boolean update(Passenger passenger) throws SQLException {
+   /* public static boolean update(Passenger passenger) throws SQLException {
         String sql = "UPDATE passengers SET name = ?, address = ?, tel = ? WHERE  passenger_id = ?";
 
         Connection connection = DbConnection.getInstance().getConnection();
@@ -68,9 +68,9 @@ public class PassengerRepo {
         pstm.setObject(1, id);
 
         return pstm.executeUpdate() > 0;
-    }
+    }*/
 
-    public static List<Passenger> getAll() throws SQLException {
+   /* public static List<Passenger> getAll() throws SQLException {
         String sql = "SELECT * FROM passengers";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
@@ -90,7 +90,7 @@ public class PassengerRepo {
            passengerList.add(passenger);
         }
         return passengerList;
-    }
+    }*/
 
     public static List<String> getIds() throws SQLException {
         String sql = "SELECT passenger_id FROM passengers";

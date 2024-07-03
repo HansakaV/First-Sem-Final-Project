@@ -4,14 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.manathungatours.dao.custom.impl.busDaoImpl;
+import lk.ijse.manathungatours.dao.custom.impl.conductorDaoImpl;
+import lk.ijse.manathungatours.dao.custom.impl.routeDaoImpl;
+import lk.ijse.manathungatours.model.Conductor;
 import lk.ijse.manathungatours.model.Route;
+import lk.ijse.manathungatours.model.RouteDTO;
 import lk.ijse.manathungatours.model.tm.RouteTm;
 import lk.ijse.manathungatours.repository.BusRepo;
 import lk.ijse.manathungatours.repository.ConductorRepo;
@@ -19,6 +20,7 @@ import lk.ijse.manathungatours.repository.DriverRepo;
 import lk.ijse.manathungatours.repository.RouteRepo;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RouteManagementFormController {
@@ -82,30 +84,21 @@ public class RouteManagementFormController {
     }
 
     private void setCellValueFactory() {
-        colRoute.setCellValueFactory(new PropertyValueFactory<>("regNumber"));
-        colBus.setCellValueFactory(new PropertyValueFactory<>("seats"));
-        colConductor.setCellValueFactory(new PropertyValueFactory<>("status"));
-        colDriver.setCellValueFactory(new PropertyValueFactory<>("service"));
+        colRoute.setCellValueFactory(new PropertyValueFactory<>("route"));
+        colBus.setCellValueFactory(new PropertyValueFactory<>("busReg"));
+        colConductor.setCellValueFactory(new PropertyValueFactory<>("driverId"));
+        colDriver.setCellValueFactory(new PropertyValueFactory<>("conductorId"));
     }
 
     private void loadAllRoutes() {
         ObservableList<RouteTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<Route> routeList = RouteRepo.getAll();
-            for (Route r1 : routeList) {
-                RouteTm tm = new RouteTm(
-                       r1.getRoute(),
-                        r1.getBusReg(),
-                        r1.getDriverId(),
-                        r1.getConductorId()
-
-                );
-
-                obList.add(tm);
+            routeDaoImpl routeDao =  new routeDaoImpl();
+            ArrayList<RouteDTO> routeList = routeDao.getAll();
+            for (RouteDTO dto : routeList) {
+                tblRoutes.getItems().add(new RouteTm(dto.getRoute(), dto.getBusReg(), dto.getConductorId(), dto.getDriverId()));
             }
-
-            tblRoutes.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -129,7 +122,8 @@ public class RouteManagementFormController {
     private void getbuses() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> busList = BusRepo.getAvailbleBuses();
+           busDaoImpl busDao = new busDaoImpl();
+            ArrayList<String> busList = busDao.checkAvailability();
 
             for (String code : busList) {
                 obList.add(code);
@@ -143,7 +137,8 @@ public class RouteManagementFormController {
     private void getConductors() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> conductorList = ConductorRepo.getIds();
+            conductorDaoImpl conductorDao =new conductorDaoImpl();
+            List<String> conductorList = conductorDao.getIds();
 
             for (String code : conductorList) {
                 obList.add(code);
@@ -165,26 +160,87 @@ public class RouteManagementFormController {
 
     @FXML
     void clearOnAction(ActionEvent event) {
-
+        clearFields();
     }
 
     @FXML
     void deleteOnAction(ActionEvent event) {
+        String route = txtRoute.getText();
+        try {
+           routeDaoImpl routeDao =  new routeDaoImpl();
+            boolean isDeleted = routeDao.delete(route);
+            if(isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Removed From System!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
 
     }
 
     @FXML
     void saveOnAction(ActionEvent event) {
+        String route = txtRoute.getText();
+        String bus = cmbBus.getValue();
+        String driver = cmbDriver.getValue();
+        String routeText = cmbConductor.getValue();
 
+        RouteDTO route1 = new RouteDTO(route, bus,driver,routeText);
+        try {
+            routeDaoImpl routeDao =  new routeDaoImpl();
+            boolean isSaved = routeDao.save(route1);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Added to System!").show();
+                clearFields();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void clearFields() {
+        txtRoute.setText("");
+        cmbConductor.setValue("");
+       cmbDriver.setValue("");
+        cmbBus.setValue("");
     }
 
-    @FXML
-    void searchOnAction(ActionEvent event) {
 
+    @FXML
+    void searchOnAction(ActionEvent event) throws SQLException {
+        String id = txtRoute.getText();
+
+        routeDaoImpl routeDao =  new routeDaoImpl();
+        ArrayList<RouteDTO> routeText = routeDao.search(id);
+        if (routeText != null) {
+            for (RouteDTO dto : routeText) {
+                txtRoute.setText(dto.getRoute());
+                cmbBus.setValue(dto.getBusReg());
+                cmbDriver.setValue(dto.getDriverId());
+                cmbConductor.setValue(dto.getConductorId());
+            }
+        } else {
+            new Alert(Alert.AlertType.INFORMATION, "OOPS!! Not Found!").show();
+        }
     }
 
     @FXML
     void updateOnAction(ActionEvent event) {
+        String routeText1 = txtRoute.getText();
+        String busValue = cmbBus.getValue();
+        String driverValue = cmbDriver.getValue();
+        String conductorValue = cmbConductor.getValue();
+
+        RouteDTO routeText = new RouteDTO(routeText1,busValue,driverValue,conductorValue);
+        try {
+            routeDaoImpl routeDao =  new routeDaoImpl();
+            boolean isUpdated = routeDao.update(routeText);
+            if(isUpdated) {
+                new Alert(Alert.AlertType.CONFIRMATION, " Update Done!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
 
     }
 

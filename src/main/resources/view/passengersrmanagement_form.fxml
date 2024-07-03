@@ -92,27 +92,27 @@
       </Button>
       <ImageView fitHeight="38.0" fitWidth="44.0" layoutX="560.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/clear.png" />
+            <Image url="@../assests/clear.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="45.0" layoutX="560.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/save.png" />
+            <Image url="@../assests/save.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="44.0" layoutX="557.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/update.png" />
+            <Image url="@../assests/update.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="560.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/delete.png" />
+            <Image url="@../assests/delete.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="170.0" fitWidth="129.0" layoutX="534.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icon/icons8-get-on-bus-50.png" />
+            <Image url="@../assests/icons8-get-on-bus-50.png" />
          </image>
       </ImageView>
    </children>

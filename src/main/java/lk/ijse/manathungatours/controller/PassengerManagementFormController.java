@@ -9,15 +9,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.manathungatours.Util.Regex;
+import lk.ijse.manathungatours.dao.custom.impl.customerDaoImpl;
 import lk.ijse.manathungatours.model.Driver;
 import lk.ijse.manathungatours.model.Engineer;
 import lk.ijse.manathungatours.model.Passenger;
+import lk.ijse.manathungatours.model.PassengerDTO;
 import lk.ijse.manathungatours.model.tm.PassengerTm;
 import lk.ijse.manathungatours.repository.DriverRepo;
 import lk.ijse.manathungatours.repository.EngineerRepo;
 import lk.ijse.manathungatours.repository.PassengerRepo;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PassengerManagementFormController {
@@ -76,24 +79,13 @@ public class PassengerManagementFormController {
     }
 
     private void loadAllPassengers() {
-        ObservableList<PassengerTm> obList = FXCollections.observableArrayList();
-
         try {
-            List<Passenger> passengerList = PassengerRepo.getAll();
-            for (Passenger ps : passengerList) {
-                PassengerTm tm = new PassengerTm(
-                        ps.getId(),
-                        ps.getName(),
-                        ps.getAddress(),
-                        ps.getTel()
-
-
-                );
-
-                obList.add(tm);
+            customerDaoImpl customerDao = new customerDaoImpl();
+            ArrayList<PassengerDTO> allPassengers = customerDao.getAllPassengers();
+            for (PassengerDTO allPassenger : allPassengers) {
+                tblPassengers.getItems().add(new PassengerTm(allPassenger.getId(),allPassenger.getName(),allPassenger.getAddress(),allPassenger.getTel()));
             }
 
-            tblPassengers.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -120,7 +112,8 @@ public class PassengerManagementFormController {
         String id = txtId.getText();
 
         try {
-            boolean isDeleted = PassengerRepo.delete(id);
+            customerDaoImpl customerDao = new customerDaoImpl();
+            boolean isDeleted = customerDao.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Removed From System!").show();
             }
@@ -138,10 +131,9 @@ public class PassengerManagementFormController {
         String address = txtAddress.getText();
         String tel = txtTel.getText();
 
-       Passenger passenger = new Passenger(id, name,address, tel);
-
         try {
-            boolean isSaved = PassengerRepo.save(passenger);
+            customerDaoImpl customerDao = new customerDaoImpl();
+           boolean isSaved =  customerDao.save(new PassengerDTO(id,name,address,tel));
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Added to System!").show();
                 clearFields();
@@ -159,10 +151,11 @@ public class PassengerManagementFormController {
         String address = txtAddress.getText();
         String tel = txtTel.getText();
 
-      Passenger passenger = new Passenger(id, name, address, tel);
+      PassengerDTO passenger = new PassengerDTO(id, name, address, tel);
 
         try {
-            boolean isUpdated = PassengerRepo.update(passenger);
+           customerDaoImpl customerDao = new customerDaoImpl();
+           boolean isUpdated = customerDao.update(passenger);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Update Done!").show();
             }
@@ -175,15 +168,20 @@ public class PassengerManagementFormController {
 
     public void searchOnAction(ActionEvent actionEvent) throws SQLException {
         String id = txtId.getText();
+        customerDaoImpl customerDao = new customerDaoImpl();
+        ArrayList<PassengerDTO> passengerDTOS = customerDao.searchById(id);
 
-       Passenger passenger = PassengerRepo.searchById(id);
-        if (passenger != null) {
-            txtId.setText(passenger.getId());
-            txtName.setText(passenger.getName());
-            txtAddress.setText(passenger.getAddress());
-            txtTel.setText(passenger.getTel());
-        } else {
+        if (passengerDTOS == null) {
             new Alert(Alert.AlertType.INFORMATION, "OOPS!! Not Found!").show();
+        }
+           else  {
+            for (PassengerDTO dto : passengerDTOS) {
+                txtId.setText(dto.getId());
+                txtName.setText(dto.getName());
+                txtAddress.setText(dto.getAddress());
+                txtTel.setText(dto.getTel());
+            }
+
         }
 
     }

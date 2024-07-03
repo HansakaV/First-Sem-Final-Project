@@ -10,14 +10,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.manathungatours.Util.Regex;
+import lk.ijse.manathungatours.dao.custom.impl.engineerDaoImpl;
 import lk.ijse.manathungatours.model.Driver;
 import lk.ijse.manathungatours.model.Engineer;
+import lk.ijse.manathungatours.model.EngineerDTO;
 import lk.ijse.manathungatours.model.tm.EngineerTm;
 import lk.ijse.manathungatours.repository.DriverRepo;
 import lk.ijse.manathungatours.repository.EngineerRepo;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EngineerManagementFormController {
@@ -76,24 +79,12 @@ public class EngineerManagementFormController {
     }
 
     private void loadAllEnginners() {
-        ObservableList<EngineerTm> obList = FXCollections.observableArrayList();
-
         try {
-            List<Engineer> engineerList = EngineerRepo.getAll();
-            for (Engineer engineer : engineerList) {
-                 EngineerTm tm = new EngineerTm(
-                        engineer.getId(),
-                        engineer.getName(),
-                        engineer.getAddress(),
-                        engineer.getTel()
-
-
-                );
-
-                obList.add(tm);
+           engineerDaoImpl engineerDao = new engineerDaoImpl();
+            ArrayList<EngineerDTO> engineerList = engineerDao.getAll();
+            for (EngineerDTO dto : engineerList) {
+                tblEnginners.getItems().add(new EngineerTm(dto.getId(), dto.getName(), dto.getAddress(), dto.getTel()));
             }
-
-            tblEnginners.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -125,7 +116,8 @@ public class EngineerManagementFormController {
         String id = txtId.getText();
 
         try {
-            boolean isDeleted = EngineerRepo.delete(id);
+            engineerDaoImpl engineerDao = new engineerDaoImpl();
+            boolean isDeleted = engineerDao.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Removed From System!").show();
             }
@@ -143,10 +135,10 @@ public class EngineerManagementFormController {
         String address = txtAddress.getText();
         String tel = txtTel.getText();
 
-      Engineer engineer = new Engineer(id, name,address, tel);
-
+      EngineerDTO engineer = new EngineerDTO(id, name,address, tel);
         try {
-            boolean isSaved = EngineerRepo.save(engineer);
+            engineerDaoImpl engineerDao = new engineerDaoImpl();
+            boolean isSaved = engineerDao.save(engineer);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Added to System!").show();
                 clearFields();
@@ -164,10 +156,11 @@ public class EngineerManagementFormController {
         String address = txtAddress.getText();
         String tel = txtTel.getText();
 
-        Engineer engineer = new Engineer(id, name, address, tel);
+        EngineerDTO engineer = new EngineerDTO(id, name, address, tel);
 
         try {
-            boolean isUpdated = EngineerRepo.update(engineer);
+            engineerDaoImpl engineerDao = new engineerDaoImpl();
+            boolean isUpdated =engineerDao.update(engineer);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Update Done!").show();
             }
@@ -181,12 +174,15 @@ public class EngineerManagementFormController {
     public void searchOnAction(ActionEvent actionEvent) throws SQLException {
         String id = txtId.getText();
 
-        Engineer engineer = EngineerRepo.searchById(id);
+        engineerDaoImpl engineerDao = new engineerDaoImpl();
+        ArrayList<EngineerDTO> engineer = engineerDao.search(id);
         if (engineer != null) {
-            txtId.setText(engineer.getId());
-            txtName.setText(engineer.getName());
-            txtAddress.setText(engineer.getAddress());
-            txtTel.setText(engineer.getTel());
+            for (EngineerDTO dto : engineer) {
+                txtId.setText(dto.getId());
+                txtName.setText(dto.getName());
+                txtAddress.setText(dto.getAddress());
+                txtTel.setText(dto.getTel());
+            }
         } else {
             new Alert(Alert.AlertType.INFORMATION, "OOPS!! Not Found!").show();
         }
