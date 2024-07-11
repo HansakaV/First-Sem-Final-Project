@@ -1,15 +1,15 @@
-package lk.ijse.manathungatours.model;
+package lk.ijse.manathungatours.dto;
 
-public class Financial {
+public class FinancialDTO {
     private String busId;
     private String description;
     private String income;
     private String cost;
 
-    public Financial() {
+    public FinancialDTO() {
     }
 
-    public Financial(String busId, String description, String income, String cost) {
+    public FinancialDTO(String busId, String description, String income, String cost) {
         this.busId = busId;
         this.description = description;
         this.income = income;

@@ -1,14 +1,14 @@
-package lk.ijse.manathungatours.model;
+package lk.ijse.manathungatours.dto;
 
-public class Bus {
+public class BusDTO {
     private String regNumber;
     private String seats;
     private String status;
     private String Service;
 
-    public Bus() {
+    public BusDTO() {
     }
-    public Bus(String regNumber, String seats, String status, String service) {
+    public BusDTO(String regNumber, String seats, String status, String service) {
         this.regNumber = regNumber;
         this.seats = seats;
         this.status = status;

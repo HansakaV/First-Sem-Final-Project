@@ -1,4 +1,4 @@
-package lk.ijse.manathungatours.model.tm;
+package lk.ijse.manathungatours.dto.tm;
 
 import lombok.*;
 
@@ -7,8 +7,8 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-
-public class ConductorTm {
+@EqualsAndHashCode
+public class DriverTm {
     private String id;
     private String name;
     private String address;

@@ -1,16 +1,5 @@
 package lk.ijse.manathungatours.repository;
 
-import lk.ijse.manathungatours.db.DbConnection;
-import lk.ijse.manathungatours.model.Conductor;
-import lk.ijse.manathungatours.model.Driver;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class DriverRepo {
 //    public static boolean save(Driver driver) throws SQLException {
 //        String sql = "INSERT INTO drivers VALUES(?, ?, ?, ?)";

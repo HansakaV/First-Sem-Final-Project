@@ -1,15 +1,15 @@
-package lk.ijse.manathungatours.model;
+package lk.ijse.manathungatours.dto;
 
-public class Driver {
+public class PassengerDTO {
     private String id;
     private String name;
     private String address;
     private String tel;
 
-    public Driver() {
+    public PassengerDTO() {
     }
 
-    public Driver(String id, String name, String address, String tel) {
+    public PassengerDTO(String id, String name, String address, String tel) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -50,7 +50,7 @@ public class Driver {
 
     @Override
     public String toString() {
-        return "Driver{" +
+        return "Passenger{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +

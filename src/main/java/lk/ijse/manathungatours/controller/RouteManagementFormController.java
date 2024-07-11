@@ -7,17 +7,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.manathungatours.dao.CrudDAO;
 import lk.ijse.manathungatours.dao.custom.impl.busDaoImpl;
 import lk.ijse.manathungatours.dao.custom.impl.conductorDaoImpl;
+import lk.ijse.manathungatours.dao.custom.impl.driverDaoImpl;
 import lk.ijse.manathungatours.dao.custom.impl.routeDaoImpl;
-import lk.ijse.manathungatours.model.Conductor;
-import lk.ijse.manathungatours.model.Route;
-import lk.ijse.manathungatours.model.RouteDTO;
-import lk.ijse.manathungatours.model.tm.RouteTm;
-import lk.ijse.manathungatours.repository.BusRepo;
-import lk.ijse.manathungatours.repository.ConductorRepo;
-import lk.ijse.manathungatours.repository.DriverRepo;
-import lk.ijse.manathungatours.repository.RouteRepo;
+import lk.ijse.manathungatours.dao.custom.routeDAO;
+import lk.ijse.manathungatours.dto.DriverDTO;
+import lk.ijse.manathungatours.dto.RouteDTO;
+import lk.ijse.manathungatours.dto.tm.RouteTm;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -70,6 +68,8 @@ public class RouteManagementFormController {
     @FXML
     private TextField txtRoute;
 
+    private routeDAO routeDao =  new routeDaoImpl();
+
     public void initialize() {
         if (colRoute == null || colBus == null || colConductor == null || colDriver == null) {
             System.err.println("One or more TableColumn objects are not properly initialized! bus");
@@ -94,8 +94,7 @@ public class RouteManagementFormController {
         ObservableList<RouteTm> obList = FXCollections.observableArrayList();
 
         try {
-            routeDaoImpl routeDao =  new routeDaoImpl();
-            ArrayList<RouteDTO> routeList = routeDao.getAll();
+                ArrayList<RouteDTO> routeList = routeDao.getAll();
             for (RouteDTO dto : routeList) {
                 tblRoutes.getItems().add(new RouteTm(dto.getRoute(), dto.getBusReg(), dto.getConductorId(), dto.getDriverId()));
             }
@@ -106,14 +105,13 @@ public class RouteManagementFormController {
 
 
     private void getDrivers() {
-        ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> driverList = DriverRepo.getIds();
+            CrudDAO<DriverDTO,String> driverDao = new driverDaoImpl();
+            ArrayList<String> driverList = driverDao.getIds();
 
             for (String code : driverList) {
-                obList.add(code);
+                cmbDriver.getItems().add(code);
             }
-            cmbDriver.setItems(obList);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -167,8 +165,7 @@ public class RouteManagementFormController {
     void deleteOnAction(ActionEvent event) {
         String route = txtRoute.getText();
         try {
-           routeDaoImpl routeDao =  new routeDaoImpl();
-            boolean isDeleted = routeDao.delete(route);
+               boolean isDeleted = routeDao.delete(route);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Removed From System!").show();
             }
@@ -188,8 +185,7 @@ public class RouteManagementFormController {
 
         RouteDTO route1 = new RouteDTO(route, bus,driver,routeText);
         try {
-            routeDaoImpl routeDao =  new routeDaoImpl();
-            boolean isSaved = routeDao.save(route1);
+                boolean isSaved = routeDao.save(route1);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Added to System!").show();
                 clearFields();
@@ -210,7 +206,6 @@ public class RouteManagementFormController {
     void searchOnAction(ActionEvent event) throws SQLException {
         String id = txtRoute.getText();
 
-        routeDaoImpl routeDao =  new routeDaoImpl();
         ArrayList<RouteDTO> routeText = routeDao.search(id);
         if (routeText != null) {
             for (RouteDTO dto : routeText) {
@@ -233,8 +228,7 @@ public class RouteManagementFormController {
 
         RouteDTO routeText = new RouteDTO(routeText1,busValue,driverValue,conductorValue);
         try {
-            routeDaoImpl routeDao =  new routeDaoImpl();
-            boolean isUpdated = routeDao.update(routeText);
+                boolean isUpdated = routeDao.update(routeText);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Update Done!").show();
             }

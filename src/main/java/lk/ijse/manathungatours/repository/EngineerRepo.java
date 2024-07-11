@@ -1,16 +1,5 @@
 package lk.ijse.manathungatours.repository;
 
-import lk.ijse.manathungatours.db.DbConnection;
-import lk.ijse.manathungatours.model.Driver;
-import lk.ijse.manathungatours.model.Engineer;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class EngineerRepo {
 //    public static boolean save(Engineer engineer) throws SQLException {
 //        String sql = "INSERT INTO enginners VALUES(?, ?, ?, ?)";

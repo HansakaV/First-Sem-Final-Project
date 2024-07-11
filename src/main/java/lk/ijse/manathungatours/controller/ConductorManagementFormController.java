@@ -1,7 +1,5 @@
 package lk.ijse.manathungatours.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,18 +8,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.manathungatours.Util.Regex;
+import lk.ijse.manathungatours.dao.custom.conductorDAO;
 import lk.ijse.manathungatours.dao.custom.impl.conductorDaoImpl;
-import lk.ijse.manathungatours.model.Bus;
-import lk.ijse.manathungatours.model.Conductor;
-import lk.ijse.manathungatours.model.ConductorDTO;
-import lk.ijse.manathungatours.model.tm.ConductorTm;
-import lk.ijse.manathungatours.repository.BusRepo;
-import lk.ijse.manathungatours.repository.ConductorRepo;
+import lk.ijse.manathungatours.dto.ConductorDTO;
+import lk.ijse.manathungatours.dto.tm.ConductorTm;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ConductorManagementFormController {
 
@@ -69,7 +63,7 @@ public class ConductorManagementFormController {
 
     @FXML
     private TextField txttel;
-
+    private conductorDAO conductorDao = new conductorDaoImpl();
 
     public void initialize() {
         if (colId == null || colName == null || colAddress == null || colTel == null) {
@@ -90,8 +84,7 @@ public class ConductorManagementFormController {
 
     private void loadAllConductors() {
         try {
-            conductorDaoImpl conductorDao = new conductorDaoImpl();
-            ArrayList<ConductorDTO> conductorList = conductorDao.getAll();
+                ArrayList<ConductorDTO> conductorList = conductorDao.getAll();
             for (ConductorDTO dto : conductorList) {
                 tblconductors.getItems().add(new ConductorTm(dto.getId(), dto.getName(), dto.getAddress(), dto.getTel()));
             }
@@ -127,8 +120,7 @@ public class ConductorManagementFormController {
         String id = txtid.getText();
 
         try {
-            conductorDaoImpl conductorDao = new conductorDaoImpl();
-            boolean isDeleted = conductorDao.delete(id);
+                boolean isDeleted = conductorDao.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Removed From System!").show();
             }
@@ -148,8 +140,7 @@ public class ConductorManagementFormController {
 
         ConductorDTO conductor = new ConductorDTO(id, name,address, tel);
         try {
-            conductorDaoImpl conductorDao = new conductorDaoImpl();
-            boolean isSaved = conductorDao.save(conductor);
+                boolean isSaved = conductorDao.save(conductor);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Added to System!").show();
                 clearFields();
@@ -168,8 +159,7 @@ public class ConductorManagementFormController {
 
         ConductorDTO conductor = new ConductorDTO(id, name, address, tel);
         try {
-            conductorDaoImpl conductorDao = new conductorDaoImpl();
-            boolean isUpdated = conductorDao.update(conductor);
+                boolean isUpdated = conductorDao.update(conductor);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Update Done!").show();
             }
@@ -181,7 +171,6 @@ public class ConductorManagementFormController {
     void searchOnAction(ActionEvent event) throws SQLException {
         String id = txtid.getText();
 
-        conductorDaoImpl conductorDao = new conductorDaoImpl();
        ArrayList<ConductorDTO> conductor = conductorDao.search(id);
         if (conductor != null) {
             for (ConductorDTO dto : conductor) {

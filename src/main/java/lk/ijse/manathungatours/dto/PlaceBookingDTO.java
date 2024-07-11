@@ -1,4 +1,4 @@
-package lk.ijse.manathungatours.model;
+package lk.ijse.manathungatours.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,8 +10,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class PlaceBooking {
-   private Booking booking;
-   private List<BookingDetail> OdList;
+public class PlaceBookingDTO {
+   private BookingDTO booking;
+   private List<BookingDetailDTO> OdList;
 
 }

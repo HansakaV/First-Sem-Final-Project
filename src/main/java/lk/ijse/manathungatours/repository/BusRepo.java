@@ -1,15 +1,5 @@
 package lk.ijse.manathungatours.repository;
 
-import lk.ijse.manathungatours.db.DbConnection;
-import lk.ijse.manathungatours.model.Bus;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class BusRepo {
 //    public static boolean save(Bus bus) throws SQLException {
 //        String sql = "INSERT INTO buses VALUES(?, ?, ?, ?)";

@@ -9,11 +9,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.manathungatours.Util.Regex;
+import lk.ijse.manathungatours.dao.custom.busDAO;
 import lk.ijse.manathungatours.dao.custom.impl.busDaoImpl;
-import lk.ijse.manathungatours.model.Bus;
-import lk.ijse.manathungatours.model.BusDTO;
-import lk.ijse.manathungatours.model.tm.BusTm;
-import lk.ijse.manathungatours.repository.BusRepo;
+import lk.ijse.manathungatours.dto.BusDTO;
+import lk.ijse.manathungatours.dto.tm.BusTm;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -75,6 +74,8 @@ public class BusManagementFormController {
     private String[] seatsList = new String[]{"42", "48" ,"54" ,"59"};
 
     private String[] serviceStatus = new String[]{"Done", "Not Done"};
+    private busDAO busDao = new busDaoImpl();
+
 
     public void initialize() {
         if (colRegNumber == null || colSeats == null || colService == null || colStatus == null) {
@@ -98,8 +99,7 @@ public class BusManagementFormController {
 
     private void loadAllBuses() {
         try {
-            busDaoImpl busDao = new busDaoImpl();
-            ArrayList<BusDTO> dtos = busDao.getAll();
+                ArrayList<BusDTO> dtos = busDao.getAll();
             for (BusDTO dto : dtos) {
                 tblBus.getItems().add(new BusTm(dto.getRegNumber(),dto.getSeats(),dto.getStatus(),dto.getService()));
             }
@@ -198,8 +198,7 @@ public class BusManagementFormController {
         BusDTO bus = new BusDTO(regNumber, seats, status, service);
 
         try {
-            busDaoImpl busDao = new busDaoImpl();
-            boolean isSaved = busDao.save(bus);
+                boolean isSaved = busDao.save(bus);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Added to System!").show();
                 clearFields();
@@ -213,7 +212,6 @@ public class BusManagementFormController {
     void searchOnAction(ActionEvent event) throws SQLException {
         String regNumber = txtRegNumber.getText();
 
-        busDaoImpl busDao = new busDaoImpl();
        ArrayList<BusDTO>  dtos =  busDao.search(regNumber);
 
         if (dtos != null) {
@@ -239,8 +237,7 @@ public class BusManagementFormController {
         BusDTO bus = new BusDTO(id, seats, status, service);
 
         try {
-            busDaoImpl busDao = new busDaoImpl();
-            boolean isUpdated = busDao.update(bus);
+                boolean isUpdated = busDao.update(bus);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Update Done!").show();
             }

@@ -1,22 +1,17 @@
 package lk.ijse.manathungatours.dao.custom.impl;
 
-import lk.ijse.manathungatours.db.DbConnection;
-import lk.ijse.manathungatours.model.Route;
-import lk.ijse.manathungatours.model.RouteDTO;
+import lk.ijse.manathungatours.dao.SQLUtill;
+import lk.ijse.manathungatours.dao.custom.routeDAO;
+import lk.ijse.manathungatours.dto.RouteDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class routeDaoImpl {
+public class routeDaoImpl implements routeDAO {
     public ArrayList<RouteDTO> getAll() throws SQLException {
         String sql = "SELECT * FROM routes";
-        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
-        ResultSet resultSet = pstm.executeQuery();
-
+        ResultSet resultSet = SQLUtill.executeQuery(sql);
         ArrayList<RouteDTO> routeList = new ArrayList<>();
         while (resultSet.next()) {
             String route = resultSet.getString(1);
@@ -31,44 +26,30 @@ public class routeDaoImpl {
 
     public boolean save(RouteDTO routeDTO) throws SQLException {
         String sql = "INSERT INTO routes VALUES(?, ?, ?, ?)";
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, routeDTO.getRoute());
-        pstm.setObject(2,routeDTO.getBusReg());
-        pstm.setObject(3, routeDTO.getDriverId());
-        pstm.setObject(4, routeDTO.getConductorId());
-
-        return pstm.executeUpdate() > 0;
-
+        return SQLUtill.executeUpdate(sql,routeDTO.getRoute(),routeDTO.getBusReg(),routeDTO.getDriverId(),routeDTO.getConductorId());
     }
     public boolean delete(String id) throws SQLException {
         String sql = "DELETE FROM route WHERE  route = ?";
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, id);
-
-        return pstm.executeUpdate() > 0;
-
+      return SQLUtill.executeUpdate(sql,id);
     }
+
+    @Override
+    public ArrayList<String> getIds() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public String getCurrentId() throws SQLException {
+        return null;
+    }
+
     public boolean update(RouteDTO routeDTO) throws SQLException {
         String sql = "UPDATE routes SET bus_reg_number = ?, conductor_id = ?, driver_id = ? WHERE  route = ?";
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, routeDTO.getRoute());
-        pstm.setObject(2,routeDTO.getBusReg());
-        pstm.setObject(3, routeDTO.getDriverId());
-        pstm.setObject(4, routeDTO.getConductorId());
-
-        return pstm.executeUpdate() > 0;
-
+        return  SQLUtill.executeUpdate(sql,routeDTO.getRoute(),routeDTO.getBusReg(),routeDTO.getDriverId(),routeDTO.getConductorId());
     }
     public ArrayList<RouteDTO> search(String id) throws SQLException {
         String sql = "SELECT * FROM routes WHERE  route = ?";
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, id);
-
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = SQLUtill.executeQuery(sql,id);
         ArrayList<RouteDTO> routeDTOS = new ArrayList<>();
         if (resultSet.next()) {
             String route1 = resultSet.getString(1);

@@ -1,4 +1,4 @@
-package lk.ijse.manathungatours.model;
+package lk.ijse.manathungatours.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,10 +9,13 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Booking {
+
+public class BookingDetailDTO {
     private String bookingId;
-    private String passengerId;
+    private String regNumber;
+    private String description;
+    private String cost;
     private Date date;
-    private String desc;
+
 
 }

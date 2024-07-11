@@ -7,16 +7,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.manathungatours.dao.CrudDAO;
 import lk.ijse.manathungatours.dao.custom.impl.busDaoImpl;
-import lk.ijse.manathungatours.model.Financial;
-import lk.ijse.manathungatours.model.tm.FinancialTm;
-import lk.ijse.manathungatours.repository.BusRepo;
-import lk.ijse.manathungatours.repository.FinancialRepo;
+import lk.ijse.manathungatours.dao.custom.impl.financialDaoImpl;
+import lk.ijse.manathungatours.dao.custom.financialDAO;
+import lk.ijse.manathungatours.dto.BusDTO;
+import lk.ijse.manathungatours.dto.FinancialDTO;
+import lk.ijse.manathungatours.dto.tm.FinancialTm;
 
-import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FinancialManagementFormController {
 
@@ -63,6 +63,7 @@ public class FinancialManagementFormController {
 
     @FXML
     private TextField txtIncome;
+    private financialDAO financialDTOStringCrudDAO = new financialDaoImpl();
 
     public void initialize() {
         if (colBus == null || colDescription == null || colIncome == null || colCost == null) {
@@ -84,9 +85,10 @@ public class FinancialManagementFormController {
 
     private void getBuses() {
         ObservableList<String> obList = FXCollections.observableArrayList();
+
         try {
-           busDaoImpl busDao =  new busDaoImpl();
-            ArrayList<String> busList = busDao.getCodes();
+           CrudDAO<BusDTO,String> busDao =  new busDaoImpl();
+            ArrayList<String> busList = busDao.getIds();
 
             for (String code : busList) {
                 obList.add(code);
@@ -102,28 +104,16 @@ public class FinancialManagementFormController {
         ObservableList<FinancialTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<Financial> financialList = FinancialRepo.getAll();
-            for (Financial financial : financialList) {
-                FinancialTm tm = new FinancialTm(
-                        financial.getBusId(),
-                        financial.getDescription(),
-                        financial.getIncome(),
-                        financial.getCost()
-                );
-
-                obList.add(tm);
+            ArrayList<FinancialDTO> financialList =financialDTOStringCrudDAO.getAll();
+            for (FinancialDTO financial : financialList) {
+                tblFinance.getItems().add(new FinancialTm(financial.getBusId(),financial.getDescription(),financial.getIncome(),financial.getCost()));
             }
-
-            tblFinance.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @FXML
-    void backOnAction(ActionEvent event) {
-        // Implement your action here
-    }
+
 
     @FXML
     void clearOnAction(ActionEvent event) {
@@ -131,7 +121,7 @@ public class FinancialManagementFormController {
     }
 
     private void clearFields() {
-        cmbBus.setValue(""); // Clearing ComboBox value
+       // cmbBus.setValue(""); // Clearing ComboBox value
         txtDescription.setText("");
         txtIncome.setText("");
         txtCost.setText("");
@@ -142,7 +132,7 @@ public class FinancialManagementFormController {
         String id = cmbBus.getValue(); // Retrieving selected value from ComboBox
 
         try {
-            boolean isDeleted = FinancialRepo.delete(id);
+            boolean isDeleted = financialDTOStringCrudDAO.delete(String.valueOf(id));
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Removed From System!").show();
             }
@@ -153,15 +143,15 @@ public class FinancialManagementFormController {
 
     @FXML
     void saveOnAction(ActionEvent event) {
-        String id = cmbBus.getValue(); // Retrieving selected value from ComboBox
+        String id = String.valueOf(cmbBus.getValue()); // Retrieving selected value from ComboBox
         String desc = txtDescription.getText();
         String income = txtIncome.getText();
         String cost = txtCost.getText();
 
-        Financial financial = new Financial(id, desc, income, cost);
+        FinancialDTO financial = new FinancialDTO(id, desc, income, cost);
 
         try {
-            boolean isSaved = FinancialRepo.save(financial);
+            boolean isSaved = financialDTOStringCrudDAO.save(financial);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Added to System!").show();
                 clearFields();
@@ -173,15 +163,15 @@ public class FinancialManagementFormController {
 
     @FXML
     void updateOnAction(ActionEvent event) {
-        String bid = cmbBus.getValue(); // Retrieving selected value from ComboBox
+        String bid = String.valueOf(cmbBus.getValue()); // Retrieving selected value from ComboBox
         String description = txtDescription.getText();
         String income = txtIncome.getText();
         String cost = txtCost.getText();
 
-        Financial financial = new Financial(bid, description, income, cost);
+        FinancialDTO financial = new FinancialDTO(bid, description, income, cost);
 
         try {
-            boolean isUpdated = FinancialRepo.update(financial);
+            boolean isUpdated = financialDTOStringCrudDAO.update(financial);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Update Done!").show();
             }
@@ -191,14 +181,16 @@ public class FinancialManagementFormController {
     }
 
     public void searchOnAction(ActionEvent actionEvent) throws SQLException {
-        String id = cmbBus.getValue(); // Retrieving selected value from ComboBox
+        String id = String.valueOf(cmbBus.getValue()); // Retrieving selected value from ComboBox
 
-        Financial financial = FinancialRepo.searchById(id);
+        ArrayList<FinancialDTO> financial = financialDTOStringCrudDAO.search(id);
         if (financial != null) {
-            cmbBus.setValue(financial.getBusId()); // Setting ComboBox value
-            txtDescription.setText(financial.getDescription());
-            txtIncome.setText(financial.getIncome());
-            txtCost.setText(financial.getCost());
+            for (FinancialDTO dto : financial) {
+                cmbBus.setValue(dto.getBusId());
+                txtDescription.setText(dto.getDescription());
+                txtIncome.setText(dto.getIncome());
+                txtCost.setText(dto.getCost());
+            }
         } else {
             new Alert(Alert.AlertType.INFORMATION, "OOPS!! Not Found!").show();
         }

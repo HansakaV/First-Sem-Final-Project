@@ -1,22 +1,17 @@
 package lk.ijse.manathungatours.dao.custom.impl;
 
-import lk.ijse.manathungatours.db.DbConnection;
-import lk.ijse.manathungatours.model.Driver;
-import lk.ijse.manathungatours.model.DriverDTO;
+import lk.ijse.manathungatours.dao.SQLUtill;
+import lk.ijse.manathungatours.dao.custom.driverDAO;
+import lk.ijse.manathungatours.dto.DriverDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class driverDaoImpl {
+public class driverDaoImpl implements driverDAO {
     public ArrayList<DriverDTO> getAll() throws SQLException {
         String sql = "SELECT * FROM drivers";
-        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
-        ResultSet resultSet = pstm.executeQuery();
-
+        ResultSet resultSet = SQLUtill.executeQuery(sql);
         ArrayList<DriverDTO> driverList = new ArrayList<>();
         while (resultSet.next()) {
             String id = resultSet.getString(1);
@@ -31,42 +26,20 @@ public class driverDaoImpl {
     }
     public boolean save(DriverDTO dto) throws SQLException {
         String sql = "INSERT INTO drivers VALUES(?, ?, ?, ?)";
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, dto.getId());
-        pstm.setObject(2,dto.getName());
-        pstm.setObject(3, dto.getAddress());
-        pstm.setObject(4, dto.getTel());
-
-        return pstm.executeUpdate() > 0;
+        return SQLUtill.executeUpdate(sql,dto.getId(),dto.getName(),dto.getAddress(),dto.getTel());
     }
     public boolean delete(String id) throws SQLException {
         String sql = "DELETE FROM drivers WHERE  driver_id = ?";
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, id);
+        return SQLUtill.executeUpdate(sql);
 
-        return pstm.executeUpdate() > 0;
     }
     public boolean update(DriverDTO driver) throws SQLException {
         String sql = "UPDATE conductors SET name = ?, address = ?, tel = ? WHERE  driver_id = ?";
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-        pstm.setObject(1, driver.getId());
-        pstm.setObject(2,driver.getName());
-        pstm.setObject(3, driver.getAddress());
-        pstm.setObject(4, driver.getTel());
-
-        return pstm.executeUpdate() > 0;
+        return SQLUtill.executeUpdate(sql);
     }
     public ArrayList<DriverDTO> search(String id) throws SQLException {
         String sql = "SELECT * FROM drivers WHERE  driver_id = ?";
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, id);
-
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = SQLUtill.executeQuery(sql);
         ArrayList<DriverDTO> dtos = new ArrayList<>();
         if (resultSet.next()) {
             String Did = resultSet.getString(1);
@@ -76,5 +49,20 @@ public class driverDaoImpl {
             dtos.add(new DriverDTO(Did,name,address,tel));
         }
         return dtos;
+    }
+    public  ArrayList<String> getIds() throws SQLException {
+        String sql = "SELECT driver_id FROM drivers";
+        ResultSet resultSet =SQLUtill.executeQuery(sql);
+        ArrayList<String> idList = new ArrayList<>();
+        while (resultSet.next()) {
+            String id = resultSet.getString(1);
+            idList.add(id);
+        }
+        return idList;
+    }
+
+    @Override
+    public String getCurrentId() throws SQLException {
+        return null;
     }
 }

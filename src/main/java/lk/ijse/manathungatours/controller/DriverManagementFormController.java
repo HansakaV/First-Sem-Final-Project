@@ -1,7 +1,5 @@
 package lk.ijse.manathungatours.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,17 +9,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.manathungatours.Util.Regex;
 import lk.ijse.manathungatours.dao.custom.impl.driverDaoImpl;
-import lk.ijse.manathungatours.model.Conductor;
-import lk.ijse.manathungatours.model.Driver;
-import lk.ijse.manathungatours.model.DriverDTO;
-import lk.ijse.manathungatours.model.tm.DriverTm;
-import lk.ijse.manathungatours.repository.ConductorRepo;
-import lk.ijse.manathungatours.repository.DriverRepo;
+import lk.ijse.manathungatours.dao.custom.driverDAO;
+import lk.ijse.manathungatours.dto.DriverDTO;
+import lk.ijse.manathungatours.dto.tm.DriverTm;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DriverManagementFormController {
 
@@ -61,6 +55,8 @@ public class DriverManagementFormController {
 
     @FXML
     private TextField txtTel;
+    private driverDAO driverDao = new driverDaoImpl();
+
 
     public void initialize() {
         if (colid == null || colname == null || coladdress == null || coltel == null) {
@@ -81,7 +77,7 @@ public class DriverManagementFormController {
 
     private void loadAllDrivers() {
         try {
-            driverDaoImpl driverDao = new driverDaoImpl();
+
             ArrayList<DriverDTO> driverList = driverDao.getAll();
             for (DriverDTO dto : driverList) {
                 tblDrivers.getItems().add(new DriverTm(dto.getId(), dto.getName(), dto.getAddress(), dto.getTel()));
@@ -117,7 +113,7 @@ public class DriverManagementFormController {
         String id = txtId.getText();
 
         try {
-            driverDaoImpl driverDao = new driverDaoImpl();
+
             boolean isDeleted = driverDao.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Removed From System!").show();
@@ -138,7 +134,7 @@ public class DriverManagementFormController {
 
         DriverDTO driver = new DriverDTO(id, name,address, tel);
         try {
-            driverDaoImpl driverDao = new driverDaoImpl();
+
             boolean isSaved = driverDao.save(driver);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Added to System!").show();
@@ -159,7 +155,7 @@ public class DriverManagementFormController {
 
         DriverDTO driver = new DriverDTO(id, name, address, tel);
         try {
-            driverDaoImpl driverDao = new driverDaoImpl();
+
             boolean isUpdated = driverDao.update(driver);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Update Done!").show();
@@ -173,7 +169,7 @@ public class DriverManagementFormController {
     public void searchOnAction(ActionEvent actionEvent) throws SQLException {
         String id = txtId.getText();
 
-        driverDaoImpl driverDao = new driverDaoImpl();
+
        ArrayList<DriverDTO>  driver = driverDao.search(id);
         if (driver != null) {
             for (DriverDTO dto : driver) {

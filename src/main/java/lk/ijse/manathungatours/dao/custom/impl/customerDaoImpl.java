@@ -1,22 +1,18 @@
 package lk.ijse.manathungatours.dao.custom.impl;
 
-import lk.ijse.manathungatours.db.DbConnection;
-import lk.ijse.manathungatours.model.Bus;
-import lk.ijse.manathungatours.model.BusDTO;
-import lk.ijse.manathungatours.model.PassengerDTO;
+import lk.ijse.manathungatours.dao.SQLUtill;
+import lk.ijse.manathungatours.dao.custom.customerDAO;
+import lk.ijse.manathungatours.dto.PassengerDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class customerDaoImpl {
-    public ArrayList<PassengerDTO> getAllPassengers() throws SQLException {
+public class customerDaoImpl implements customerDAO {
+    @Override
+    public ArrayList<PassengerDTO> getAll() throws SQLException {
         String sql = "SELECT * FROM passengers";
-        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = SQLUtill.executeQuery(sql);
         ArrayList<PassengerDTO> allPassengers = new ArrayList<>();
         while (resultSet.next()) {
             String id = resultSet.getString(1);
@@ -27,27 +23,17 @@ public class customerDaoImpl {
         }
         return allPassengers;
     }
-
+    @Override
     public boolean save(PassengerDTO dto) throws SQLException {
         String sql = "INSERT INTO passengers VALUES(?, ?, ?, ?)";
-
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, dto.getId());
-        pstm.setObject(2, dto.getName());
-        pstm.setObject(3, dto.getAddress());
-        pstm.setObject(4, dto.getTel());
-        return pstm.executeUpdate() > 0;
+        return SQLUtill.executeUpdate(sql,dto.getId(),dto.getName(),dto.getAddress(),dto.getTel());
 
     }
 
-    public ArrayList<PassengerDTO> searchById(String id) throws SQLException {
+    @Override
+    public ArrayList<PassengerDTO> search(String id) throws SQLException {
         String sql = "SELECT * FROM passengers WHERE  passenger_id = ?";
-
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, id);
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = SQLUtill.executeQuery(sql,id);
         ArrayList<PassengerDTO> passengerDTOS = new ArrayList<>();
         while (resultSet.next()) {
             String Pid = resultSet.getString(1);
@@ -58,42 +44,30 @@ public class customerDaoImpl {
         }
         return passengerDTOS;
     }
+    @Override
     public boolean update(PassengerDTO dto) throws SQLException {
         String sql = "UPDATE passengers SET name = ?, address = ?, tel = ? WHERE  passenger_id = ?";
-
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, dto.getId());
-        pstm.setObject(2,dto.getName());
-        pstm.setObject(3, dto.getAddress());
-        pstm.setObject(4, dto.getTel());
-
-        return pstm.executeUpdate() > 0;
+        return SQLUtill.executeUpdate(sql,dto.getId(),dto.getName(),dto.getAddress(),dto.getTel());
     }
+    @Override
     public boolean delete(String id) throws SQLException {
         String sql = "DELETE FROM passengers WHERE  passenger_id = ?";
-
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, id);
-
-        return pstm.executeUpdate() > 0;
-    }
-    public ArrayList<BusDTO> getAll() throws SQLException {
-        String sql = "SELECT * FROM buses";
-
-        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
-        ResultSet resultSet = pstm.executeQuery();
-        ArrayList<BusDTO> busDTOS = new ArrayList<>();
-
+        return SQLUtill.executeUpdate(sql,id);
+   }
+    public  ArrayList<String> getIds() throws SQLException {
+        String sql = "SELECT passenger_id FROM passengers";
+        ResultSet resultSet = SQLUtill.executeQuery(sql);
+        ArrayList<String> idList = new ArrayList<>();
         while (resultSet.next()) {
-            String regNum = resultSet.getString(1);
-            String seats = resultSet.getString(2);
-            String status = resultSet.getString(3);
-            String service = resultSet.getString(4);
-            busDTOS.add(new BusDTO(regNum,seats,status,service));
-
+            String id = resultSet.getString(1);
+            idList.add(id);
         }
-        return busDTOS;
+        return idList;
     }
+
+    @Override
+    public String getCurrentId() throws SQLException {
+        return null;
+    }
+
 }

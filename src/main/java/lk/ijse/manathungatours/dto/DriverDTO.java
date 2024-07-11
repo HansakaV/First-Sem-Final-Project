@@ -1,4 +1,4 @@
-package lk.ijse.manathungatours.model;
+package lk.ijse.manathungatours.dto;
 
 public class DriverDTO {
     private String id;

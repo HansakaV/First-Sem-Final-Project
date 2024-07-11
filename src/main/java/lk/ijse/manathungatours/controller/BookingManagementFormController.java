@@ -7,11 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.manathungatours.dao.custom.impl.busDaoImpl;
+import lk.ijse.manathungatours.dao.CrudDAO;
+import lk.ijse.manathungatours.dao.custom.impl.*;
 import lk.ijse.manathungatours.db.DbConnection;
-import lk.ijse.manathungatours.model.*;
-import lk.ijse.manathungatours.model.tm.BookingTm;
-import lk.ijse.manathungatours.repository.*;
+import lk.ijse.manathungatours.dto.*;
+import lk.ijse.manathungatours.dto.tm.BookingTm;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -109,7 +109,8 @@ public class BookingManagementFormController {
 
     private void getCurrentOrderId() {
         try {
-            String currentId = BookingRepo.getCurrentId();
+            CrudDAO<BookingDTO,String> bookingDTOStringCrudDAO = new bookingDaoImpl();
+            String currentId = bookingDTOStringCrudDAO.getCurrentId();
 
             String nextOrderId = generateNextOrderId(currentId);
             lblBookId.setText(nextOrderId);
@@ -121,9 +122,10 @@ public class BookingManagementFormController {
 
     private void getBuses() {
         ObservableList<String> obList = FXCollections.observableArrayList();
+
         try {
-            busDaoImpl busDao = new busDaoImpl();
-            ArrayList<String> busList = busDao.checkAvailability();
+            CrudDAO<BusDTO,String> busDao =  new busDaoImpl();
+            ArrayList<String> busList = busDao.getIds();
 
             for (String code : busList) {
                 obList.add(code);
@@ -136,15 +138,13 @@ public class BookingManagementFormController {
     }
 
     private void getDrivers() {
-        ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> driverList = DriverRepo.getIds();
+            CrudDAO<DriverDTO,String> driverDao = new driverDaoImpl();
+            ArrayList<String> driverList = driverDao.getIds();
 
             for (String code : driverList) {
-                obList.add(code);
+                cmbDriver.getItems().add(code);
             }
-            cmbDriver.setItems(obList);
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -163,7 +163,8 @@ public class BookingManagementFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = PassengerRepo.getIds();
+            CrudDAO<PassengerDTO,String> passengerDTOStringCrudDAO = new customerDaoImpl();
+            ArrayList<String> idList = passengerDTOStringCrudDAO.getIds();
 
             for (String id : idList) {
                 obList.add(id);
@@ -184,15 +185,15 @@ public class BookingManagementFormController {
        Date date = Date.valueOf(LocalDate.now());
        String desc = txtDescription.getText();
 
-        var booking = new Booking(bookingId, passengerId, date,desc);
+        var booking = new BookingDTO(bookingId, passengerId, date,desc);
 
-        List<BookingDetail> odList = new ArrayList<>();
+        List<BookingDetailDTO> odList = new ArrayList<>();
 
         for (int i = 0; i < tblBookings.getItems().size(); i++) {
             BookingTm tm = obList.get(i);
 
 
-            BookingDetail od = new BookingDetail(
+            BookingDetailDTO od = new BookingDetailDTO(
                     bookingId,
                     tm.getRegNumber(),
                     tm.getDescription(),
@@ -203,9 +204,10 @@ public class BookingManagementFormController {
             odList.add(od);
         }
 
-        PlaceBooking po = new PlaceBooking(booking, odList);
+        PlaceBookingDTO po = new PlaceBookingDTO(booking, odList);
         try {
-            boolean isPlaced = PlaceBookingRepo.placeOrder(po);
+           placeBookingDaoImpl placeBookingDao =  new placeBookingDaoImpl();
+            boolean isPlaced = placeBookingDao.placeOrder(po);
             if(isPlaced) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Booking Placed!").show();
             } else {

@@ -1,7 +1,5 @@
 package lk.ijse.manathungatours.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -10,18 +8,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.manathungatours.Util.Regex;
 import lk.ijse.manathungatours.dao.custom.impl.customerDaoImpl;
-import lk.ijse.manathungatours.model.Driver;
-import lk.ijse.manathungatours.model.Engineer;
-import lk.ijse.manathungatours.model.Passenger;
-import lk.ijse.manathungatours.model.PassengerDTO;
-import lk.ijse.manathungatours.model.tm.PassengerTm;
-import lk.ijse.manathungatours.repository.DriverRepo;
-import lk.ijse.manathungatours.repository.EngineerRepo;
-import lk.ijse.manathungatours.repository.PassengerRepo;
+import lk.ijse.manathungatours.dao.custom.customerDAO;
+import lk.ijse.manathungatours.dto.PassengerDTO;
+import lk.ijse.manathungatours.dto.tm.PassengerTm;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PassengerManagementFormController {
 
@@ -61,6 +53,8 @@ public class PassengerManagementFormController {
 
     @FXML
     private TextField txtTel;
+    private customerDAO customerDao = new customerDaoImpl();
+
     public void initialize() {
         if (colid == null || colname == null || coladdress == null || coltel == null) {
             System.err.println("One or more TableColumn objects are not properly initialized!");
@@ -80,8 +74,7 @@ public class PassengerManagementFormController {
 
     private void loadAllPassengers() {
         try {
-            customerDaoImpl customerDao = new customerDaoImpl();
-            ArrayList<PassengerDTO> allPassengers = customerDao.getAllPassengers();
+            ArrayList<PassengerDTO> allPassengers = customerDao.getAll();
             for (PassengerDTO allPassenger : allPassengers) {
                 tblPassengers.getItems().add(new PassengerTm(allPassenger.getId(),allPassenger.getName(),allPassenger.getAddress(),allPassenger.getTel()));
             }
@@ -112,7 +105,6 @@ public class PassengerManagementFormController {
         String id = txtId.getText();
 
         try {
-            customerDaoImpl customerDao = new customerDaoImpl();
             boolean isDeleted = customerDao.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Removed From System!").show();
@@ -132,7 +124,6 @@ public class PassengerManagementFormController {
         String tel = txtTel.getText();
 
         try {
-            customerDaoImpl customerDao = new customerDaoImpl();
            boolean isSaved =  customerDao.save(new PassengerDTO(id,name,address,tel));
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Added to System!").show();
@@ -154,7 +145,6 @@ public class PassengerManagementFormController {
       PassengerDTO passenger = new PassengerDTO(id, name, address, tel);
 
         try {
-           customerDaoImpl customerDao = new customerDaoImpl();
            boolean isUpdated = customerDao.update(passenger);
             if(isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, " Update Done!").show();
@@ -168,8 +158,8 @@ public class PassengerManagementFormController {
 
     public void searchOnAction(ActionEvent actionEvent) throws SQLException {
         String id = txtId.getText();
-        customerDaoImpl customerDao = new customerDaoImpl();
-        ArrayList<PassengerDTO> passengerDTOS = customerDao.searchById(id);
+
+        ArrayList<PassengerDTO> passengerDTOS = customerDao.search(id);
 
         if (passengerDTOS == null) {
             new Alert(Alert.AlertType.INFORMATION, "OOPS!! Not Found!").show();

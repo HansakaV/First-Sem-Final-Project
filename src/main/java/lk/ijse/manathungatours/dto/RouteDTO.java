@@ -1,4 +1,4 @@
-package lk.ijse.manathungatours.model;
+package lk.ijse.manathungatours.dto;
 
 public class RouteDTO {
     private String route;

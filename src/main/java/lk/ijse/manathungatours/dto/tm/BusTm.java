@@ -1,4 +1,4 @@
-package lk.ijse.manathungatours.model.tm;
+package lk.ijse.manathungatours.dto.tm;
 
 import lombok.*;
 
