@@ -18,6 +18,7 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class BookingManagementFormController {
 
@@ -179,45 +181,45 @@ public class BookingManagementFormController {
 
 
     @FXML
-    void placeBookingOnAction(ActionEvent event) throws JRException, SQLException {
-       String bookingId = lblBookId.getText();
-       String passengerId = cmbPassenger.getValue();
-       Date date = Date.valueOf(LocalDate.now());
-       String desc = txtDescription.getText();
-
-        var booking = new BookingDTO(bookingId, passengerId, date,desc);
-
-        List<BookingDetailDTO> odList = new ArrayList<>();
-
-        for (int i = 0; i < tblBookings.getItems().size(); i++) {
-            BookingTm tm = obList.get(i);
-
-
-            BookingDetailDTO od = new BookingDetailDTO(
-                    bookingId,
-                    tm.getRegNumber(),
-                    tm.getDescription(),
-                    tm.getCost(),
-                    tm.getDate()
-            );
-
-            odList.add(od);
-        }
-
-        PlaceBookingDTO po = new PlaceBookingDTO(booking, odList);
-        try {
-           placeBookingDaoImpl placeBookingDao =  new placeBookingDaoImpl();
-            boolean isPlaced = placeBookingDao.placeOrder(po);
-            if(isPlaced) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Booking Placed!").show();
-            } else {
-                new Alert(Alert.AlertType.WARNING, "Booking Placed Unsuccessfully!").show();
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-        printBill();
-    }
+//    void placeBookingOnAction(ActionEvent event) throws JRException, SQLException {
+//       String bookingId = lblBookId.getText();
+//       String passengerId = cmbPassenger.getValue();
+//       Date date = Date.valueOf(LocalDate.now());
+//       String desc = txtDescription.getText();
+//
+//        var booking = new BookingDTO(bookingId, passengerId, date,desc);
+//
+//        List<BookingDetailDTO> odList = new ArrayList<>();
+//
+//        for (int i = 0; i < tblBookings.getItems().size(); i++) {
+//            BookingTm tm = obList.get(i);
+//
+//
+//            BookingDetailDTO od = new BookingDetailDTO(
+//                    bookingId,
+//                    tm.getRegNumber(),
+//                    tm.getDescription(),
+//                    tm.getCost(),
+//                    tm.getDate()
+//            );
+//
+//            odList.add(od);
+//        }
+//
+//        PlaceBookingDTO po = new PlaceBookingDTO(booking, odList);
+//        try {
+//           placeBookingDaoImpl placeBookingDao =  new placeBookingDaoImpl();
+//            boolean isPlaced = placeBookingDao.placeOrder(po);
+//            if(isPlaced) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Booking Placed!").show();
+//            } else {
+//                new Alert(Alert.AlertType.WARNING, "Booking Placed Unsuccessfully!").show();
+//            }
+//        } catch (SQLException e) {
+//            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+//        }
+//        printBill();
+//    }
 
     public void printBill() throws JRException, SQLException {
         JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/Report/Manathunga_Tours.jrxml");

@@ -27,9 +27,6 @@ public class bookingDaoImpl implements CrudDAO<BookingDTO,String> {
     public  boolean save(BookingDTO booking) throws SQLException {
         String sql = "INSERT INTO bookings VALUES(?, ?, ?)";
         return SQLUtill.executeUpdate(sql,booking.getBookingId(),booking.getDate(),booking.getPassengerId(),booking.getDesc());
-
-//        boolean b = pstm.executeUpdate() > 0;
-//        return b;
     }
 
     @Override
